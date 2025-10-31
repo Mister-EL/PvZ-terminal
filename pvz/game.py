@@ -386,6 +386,7 @@ class Game:
             return
         stdscr = self._stdscr
         stdscr.nodelay(False)
-        stdscr.addstr(GRID_HEIGHT + 2, 0, "Нажмите любую клавишу для выхода")
+        stdscr.addstr(GRID_HEIGHT + 2, 0, "")
+        stdscr.addstr(GRID_HEIGHT + 3, 0, "Нажмите любую клавишу для выхода")
         stdscr.refresh()
         stdscr.getch()
