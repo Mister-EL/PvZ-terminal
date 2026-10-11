@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "campaign-11-shield-breaker",
+  "name": "Щитолом",
+  "kind": "campaign",
+  "chapter": "4. Железный квартал",
+  "order": 11,
+  "seed": 2411,
+  "sun": 450,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "SNOW_PEA",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Несколько защищённых целей подходят с большими интервалами. Хищник обходит долгий обстрел.",
+  "objective": "Чередовать дальний огонь и хищников против щитов.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 52,
+          "row": 1,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 35,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 50,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 66,
+          "row": 1,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
