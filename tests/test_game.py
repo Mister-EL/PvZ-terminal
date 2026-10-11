@@ -52,5 +52,33 @@ class ZombieMovementTests(unittest.TestCase):
         self.assertAlmostEqual(zombie.move_progress, 0.2)
 
 
+class PauseTests(unittest.TestCase):
+    def test_pause_freezes_simulation_and_planting(self):
+        game = Game(0.2)
+        game.paused = True
+        game.step()
+        game.place_selected()
+        self.assertEqual(game.time_elapsed, 0)
+        self.assertEqual(game.sun, 300)
+        self.assertFalse(game.grid.iter_plants())
+
+    def test_pause_does_not_allow_shovel(self):
+        game = Game(0.2)
+        game.place_selected()
+        game.paused = True
+        game.dig_up()
+        self.assertIsNotNone(game.grid.get(game.cursor_row, game.cursor_col))
+
+    def test_end_freezes_simulation_and_does_not_resume(self):
+        game = Game(0.2)
+        game.game_over = True
+        game.step()
+        game.place_selected()
+        game.handle_keypress(ord('p'))
+        self.assertEqual(game.time_elapsed, 0)
+        self.assertFalse(game.grid.iter_plants())
+        self.assertFalse(game.paused)
+
+
 if __name__ == '__main__':
     unittest.main()
