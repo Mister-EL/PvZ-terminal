@@ -58,6 +58,8 @@ class Game:
         self.sun: int = scenario.sun if scenario else SUN_START
         self.score: int = 0
         self.zombies_killed = 0
+        self.plants_placed = 0
+        self.plants_lost = 0
         self.lawnmowers = [True] * GRID_HEIGHT
         self.lawnmowers_used = 0
         self.selected: PlantType = PlantType.PEASHOOTER
@@ -183,36 +185,40 @@ class Game:
         if slot in mapping:
             self.selected = mapping[slot]
 
-    def place_selected(self) -> None:
-        if self.paused or self.game_over:
-            return
-        plant_type = self.selected
-        if plant_type not in self.allowed_plants:
-            self.show_message("растение недоступно в этом испытании")
-            return
-        row, col = self.cursor_row, self.cursor_col
-        if self.grid.get(row, col):
-            self.show_message("клетка занята")
-            return
-        cost = self.plant_cost(plant_type)
-        if self.sun < cost:
-            self.show_message("недостаточно Sun")
-            return
-        ready_at = self._plant_ready_at[plant_type]
-        if self.time_elapsed < ready_at:
-            self.show_message("КД не прошёл")
-            return
+    def cooldown_remaining(self, plant_type: PlantType) -> float:
+        return max(0.0, round(self._plant_ready_at[plant_type] - self.time_elapsed, 10))
 
-        plant = Plant(
-            plant_type=plant_type,
-            row=row,
-            col=col,
-            hp=float(PLANT_HEALTH[plant_type]),
-            last_action_time=self.time_elapsed,
-        )
+    def planting_error(self) -> Optional[str]:
+        if self.game_over:
+            return "игра закончена"
+        if self.paused:
+            return "игра на паузе"
+        if self.selected not in self.allowed_plants:
+            return "растение недоступно в этом испытании"
+        if not self.grid.is_inside(self.cursor_row, self.cursor_col):
+            return "клетка вне поля"
+        if self.grid.get(self.cursor_row, self.cursor_col):
+            return "клетка занята"
+        if self.sun < self.plant_cost(self.selected):
+            return "недостаточно солнца"
+        remaining = self.cooldown_remaining(self.selected)
+        if remaining > 0:
+            return f"перезарядка: {remaining:.1f} с"
+        return None
+
+    def place_selected(self) -> bool:
+        error = self.planting_error()
+        if error:
+            self.show_message(error)
+            return False
+        plant_type = self.selected
+        plant = Plant(plant_type, self.cursor_row, self.cursor_col,
+                      float(PLANT_HEALTH[plant_type]), last_action_time=self.time_elapsed)
         self.grid.set(plant)
-        self.sun -= cost
+        self.sun -= self.plant_cost(plant_type)
         self._plant_ready_at[plant_type] = self.time_elapsed + PLANT_COOLDOWNS[plant_type]
+        self.plants_placed += 1
+        return True
 
     def dig_up(self) -> None:
         if self.paused or self.game_over:
@@ -289,6 +295,7 @@ class Game:
                 plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self.tick_seconds
                 if plant.hp <= 0:
                     self.grid.remove(plant.row, plant.col)
+                    self.plants_lost += 1
                 continue
 
             zombie.move_progress += self.tick_seconds
