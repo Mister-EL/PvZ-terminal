@@ -96,6 +96,8 @@ class Game:
 
     # --- Основной цикл ------------------------------------------------------
     def step(self) -> None:
+        if self.paused or self.game_over:
+            return
         self.time_elapsed += self.tick_seconds
         self.update_timers()
         self.move_projectiles()
@@ -116,6 +118,8 @@ class Game:
             self.handle_keypress(key)
 
     def handle_keypress(self, key: int) -> None:
+        if self.game_over:
+            return
         if key in (ord("q"), ord("Q")):
             self.game_over = True
             self.game_over_reason = "Выход"
@@ -149,6 +153,8 @@ class Game:
             self.selected = mapping[slot]
 
     def place_selected(self) -> None:
+        if self.paused or self.game_over:
+            return
         plant_type = self.selected
         row, col = self.cursor_row, self.cursor_col
         if self.grid.get(row, col):
@@ -175,6 +181,8 @@ class Game:
         self._plant_ready_at[plant_type] = self.time_elapsed + PLANT_COOLDOWNS[plant_type]
 
     def dig_up(self) -> None:
+        if self.paused or self.game_over:
+            return
         plant = self.grid.get(self.cursor_row, self.cursor_col)
         if plant:
             self.grid.remove(self.cursor_row, self.cursor_col)
