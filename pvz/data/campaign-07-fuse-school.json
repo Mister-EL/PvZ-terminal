@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "campaign-07-fuse-school",
+  "name": "Школа подрывника",
+  "kind": "campaign",
+  "chapter": "3. Подземная работа",
+  "order": 7,
+  "seed": 2407,
+  "sun": 300,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Картофельной мине нужно время на подготовку. Расписание врагов оставляет место для расчёта.",
+  "objective": "Использовать мины на подходах и сохранить дальнюю оборону.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 38,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 6,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 24,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 42,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 55,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
