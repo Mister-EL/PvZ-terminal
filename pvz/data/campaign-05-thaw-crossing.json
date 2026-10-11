@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "id": "campaign-05-thaw-crossing",
+  "name": "Оттепель на флангах",
+  "kind": "campaign",
+  "chapter": "2. Холодный фронт",
+  "order": 5,
+  "seed": 2405,
+  "sun": 400,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "SNOW_PEA"
+  ],
+  "modifiers": {
+    "sun_cap": 600,
+    "preplanted": [
+      {
+        "row": 1,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Одновременные атаки по двум краям чередуются с медленным центром.",
+  "objective": "Распределить оборону между быстрыми флангами и бронированным центром.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 18,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 35,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 23,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 23,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
