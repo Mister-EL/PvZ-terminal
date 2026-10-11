@@ -34,6 +34,7 @@ PLANT_COSTS: Dict[PlantType, int] = {
     PlantType.WALL_NUT: 50,
     PlantType.CHOMPER: 150,
     PlantType.SNOW_PEA: 175,
+    PlantType.CHERRY_BOMB: 150,
 }
 
 PLANT_COOLDOWNS: Dict[PlantType, float] = {
@@ -42,6 +43,7 @@ PLANT_COOLDOWNS: Dict[PlantType, float] = {
     PlantType.WALL_NUT: 2.0,
     PlantType.CHOMPER: 7.0,
     PlantType.SNOW_PEA: 2.0,
+    PlantType.CHERRY_BOMB: 25.0,
 }
 
 PLANT_HEALTH: Dict[PlantType, int] = {
@@ -50,6 +52,7 @@ PLANT_HEALTH: Dict[PlantType, int] = {
     PlantType.WALL_NUT: 1200,
     PlantType.CHOMPER: 300,
     PlantType.SNOW_PEA: 300,
+    PlantType.CHERRY_BOMB: 300,
 }
 
 ZOMBIE_HEALTH: Dict[ZombieType, int] = {
@@ -91,3 +94,6 @@ ZOMBIE_NAMES = {
 }
 
 SLOW_DURATION = 4.0
+
+BOMB_FUSE = 1.2
+EXPLOSION_DAMAGE = 1800

@@ -10,6 +10,7 @@ class PlantType(Enum):
     WALL_NUT = "W"
     CHOMPER = "C"
     SNOW_PEA = "I"
+    CHERRY_BOMB = "X"
 
 
 class ZombieType(Enum):
