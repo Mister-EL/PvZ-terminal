@@ -26,6 +26,8 @@ from .constants import (
     ZOMBIE_DPS,
     ZOMBIE_HEALTH,
     ZOMBIE_MOVE_INTERVAL,
+    ZOMBIE_MOVE_INTERVALS,
+    SHIELD_HEALTH,
     ZOMBIE_SCORE,
 )
 from .grid import Grid
@@ -250,9 +252,7 @@ class Game:
                        and projectile.col <= z.col <= end_col and z.hp > 0]
             target = min(targets, key=lambda z: z.col, default=None)
             if target:
-                target.hp -= PROJECTILE_DAMAGE
-                if target.hp <= 0:
-                    self.kill_zombie(target)
+                self.damage_zombie(target, PROJECTILE_DAMAGE)
                 continue
             projectile.col = end_col
             if projectile.col < GRID_WIDTH:
@@ -299,8 +299,9 @@ class Game:
                 continue
 
             zombie.move_progress += self.tick_seconds
-            while zombie.move_progress + 1e-9 >= ZOMBIE_MOVE_INTERVAL / self._difficulty["speed"]:
-                zombie.move_progress -= ZOMBIE_MOVE_INTERVAL / self._difficulty["speed"]
+            move_interval = ZOMBIE_MOVE_INTERVALS[zombie.zombie_type] / self._difficulty["speed"]
+            while zombie.move_progress + 1e-9 >= move_interval:
+                zombie.move_progress -= move_interval
                 target_col = zombie.col - 1
                 if target_col < 0:
                     zombie.col = target_col
@@ -354,15 +355,24 @@ class Game:
                 return
 
     # --- Вспомогательные методы для зомби -----------------------------------
+    def create_zombie(self, kind: ZombieType, row: int) -> Zombie:
+        shield = SHIELD_HEALTH * self._difficulty["health"] if kind == ZombieType.SHIELD else 0.0
+        return Zombie(kind, row, GRID_WIDTH - 1,
+                      ZOMBIE_HEALTH[kind] * self._difficulty["health"], shield_hp=shield)
+
+    def damage_zombie(self, zombie: Zombie, damage: float, *, bypass_shield: bool = False) -> None:
+        if not bypass_shield and zombie.shield_hp > 0:
+            absorbed = min(damage, zombie.shield_hp)
+            zombie.shield_hp -= absorbed
+            damage -= absorbed
+        zombie.hp -= damage
+        if zombie.hp <= 0:
+            self.kill_zombie(zombie)
+
     def spawn_zombie(self) -> None:
         row = self._rng.randrange(GRID_HEIGHT)
         z_type = self.pick_zombie_type()
-        zombie = Zombie(
-            zombie_type=z_type,
-            row=row,
-            col=GRID_WIDTH - 1,
-            hp=float(ZOMBIE_HEALTH[z_type]) * self._difficulty["health"],
-        )
+        zombie = self.create_zombie(z_type, row)
         self.zombies.append(zombie)
         interval = 6.0 if self.time_elapsed < 60.0 else 3.0
         self._next_spawn_time = self.time_elapsed + interval * self._difficulty["spawn"]
@@ -377,8 +387,7 @@ class Game:
             if spawn.time > elapsed + 1e-9:
                 break
             kind = ZombieType[spawn.zombie]
-            self.zombies.append(Zombie(kind, spawn.row, GRID_WIDTH - 1,
-                                       ZOMBIE_HEALTH[kind] * self._difficulty["health"]))
+            self.zombies.append(self.create_zombie(kind, spawn.row))
             self._wave_spawn_index += 1
         if self._wave_spawn_index == len(wave.spawns) and elapsed + 1e-9 >= wave.duration:
             self._wave_index += 1
@@ -415,9 +424,16 @@ class Game:
         remaining_shift = 0.6 - z_weight
         cone_weight = 0.3 + remaining_shift / 3.0
         bucket_weight = 0.1 + remaining_shift * 2.0 / 3.0
+        population = [ZombieType.NORMAL, ZombieType.CONE, ZombieType.BUCKET]
         weights = [z_weight, cone_weight, bucket_weight]
+        if self.time_elapsed >= 30:
+            population.append(ZombieType.RUNNER)
+            weights.append(0.15)
+        if self.time_elapsed >= 90:
+            population.append(ZombieType.SHIELD)
+            weights.append(0.15)
         choice = self._rng.choices(
-            population=[ZombieType.NORMAL, ZombieType.CONE, ZombieType.BUCKET],
+            population=population,
             weights=weights,
             k=1,
         )[0]

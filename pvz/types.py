@@ -15,6 +15,8 @@ class ZombieType(Enum):
     NORMAL = "z"
     CONE = "Z"
     BUCKET = "B"
+    RUNNER = "r"
+    SHIELD = "H"
 
 
 @dataclass
@@ -37,6 +39,7 @@ class Zombie:
     col: int
     hp: float
     move_progress: float = 0.0
+    shield_hp: float = 0.0
 
     @property
     def char(self) -> str:
