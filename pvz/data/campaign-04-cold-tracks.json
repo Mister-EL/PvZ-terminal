@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "id": "campaign-04-cold-tracks",
+  "name": "Холодные следы",
+  "kind": "campaign",
+  "chapter": "2. Холодный фронт",
+  "order": 4,
+  "seed": 2404,
+  "sun": 350,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Бегуны появляются парами. Ледяной горох позволяет удержать их на расстоянии.",
+  "objective": "Остановить быстрых врагов во всех рядах.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 34,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 46,
+          "row": 1,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 17,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 29,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 41,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 52,
+          "row": 1,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
