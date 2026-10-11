@@ -10,6 +10,7 @@ from .constants import (
     CHOMPER_CHEW_TIME,
     DIFFICULTIES,
     GRID_HEIGHT,
+    SIMULATION_STEP,
     GRID_WIDTH,
     MESSAGE_DURATION,
     PEASHOOTER_INTERVAL,
@@ -46,6 +47,8 @@ class Game:
         if difficulty not in DIFFICULTIES:
             raise ValueError("Unknown difficulty")
         self.tick_seconds = tick_seconds
+        self._dt = tick_seconds
+        self._time_accumulator = 0.0
         self.difficulty = difficulty
         self._difficulty = DIFFICULTIES[difficulty]
         self.scenario = scenario
@@ -136,14 +139,22 @@ class Game:
     def step(self) -> None:
         if self.paused or self.game_over:
             return
-        self.time_elapsed = round(self.time_elapsed + self.tick_seconds, 10)
-        self.update_timers()
-        self.move_projectiles()
-        self.handle_attacks()
-        self.spawn_and_move_zombies()
-        self.generate_sun()
-        self.check_loss()
-        self.check_victory()
+        # Fixed simulation slices keep seed, combat and economy identical at any UI tick.
+        self._time_accumulator += self.tick_seconds
+        self._dt = SIMULATION_STEP
+        try:
+            while self._time_accumulator + 1e-9 >= SIMULATION_STEP and not self.game_over:
+                self._time_accumulator -= SIMULATION_STEP
+                self.time_elapsed = round(self.time_elapsed + SIMULATION_STEP, 10)
+                self.update_timers()
+                self.move_projectiles()
+                self.handle_attacks()
+                self.spawn_and_move_zombies()
+                self.generate_sun()
+                self.check_loss()
+                self.check_victory()
+        finally:
+            self._dt = self.tick_seconds
 
     # --- Обработка ввода ----------------------------------------------------
     def process_input(self) -> None:
@@ -250,7 +261,7 @@ class Game:
     def move_projectiles(self) -> None:
         new_projectiles: List[Projectile] = []
         for projectile in self.projectiles:
-            end_col = projectile.col + PROJECTILE_SPEED_CELLS_PER_SECOND * self.tick_seconds
+            end_col = projectile.col + PROJECTILE_SPEED_CELLS_PER_SECOND * self._dt
             # Include the initial cell: a pea created next to a zombie must hit it.
             targets = [z for z in self.zombies if z.row == projectile.row
                        and projectile.col <= z.col <= end_col and z.hp > 0]
@@ -270,7 +281,7 @@ class Game:
         for plant in self.grid.iter_plants():
             if plant.plant_type in (PlantType.PEASHOOTER, PlantType.SNOW_PEA, PlantType.REPEATER):
                 if (
-                    self.time_elapsed - plant.last_action_time >= PEASHOOTER_INTERVAL
+                    self.time_elapsed - plant.last_action_time + 1e-9 >= PEASHOOTER_INTERVAL
                     and self.any_zombie_to_right(plant.row, plant.col)
                 ):
                     shot_col = plant.col + 1
@@ -314,13 +325,13 @@ class Game:
             plant = self.grid.get(zombie.row, zombie.col)
             if plant:
                 zombie.move_progress = 0.0
-                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self.tick_seconds * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
+                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self._dt * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
                 if plant.hp <= 0:
                     self.grid.remove(plant.row, plant.col)
                     self.plants_lost += 1
                 continue
 
-            zombie.move_progress += self.tick_seconds * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
+            zombie.move_progress += self._dt * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
             move_interval = ZOMBIE_MOVE_INTERVALS[zombie.zombie_type] / self._difficulty["speed"]
             while zombie.move_progress + 1e-9 >= move_interval:
                 zombie.move_progress -= move_interval
