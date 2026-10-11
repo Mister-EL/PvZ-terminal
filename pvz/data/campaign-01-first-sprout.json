@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "campaign-01-first-sprout",
+  "name": "Первый росток",
+  "kind": "campaign",
+  "chapter": "1. Зелёный квартал",
+  "order": 1,
+  "seed": 2401,
+  "sun": 300,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Три короткие волны знакомят со стрельбой и посадкой в нужном ряду.",
+  "objective": "Защитить все пять рядов.",
+  "waves": [
+    {
+      "duration": 50,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 33,
+          "row": 1,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 32,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 12,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 19,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 26,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 33,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}

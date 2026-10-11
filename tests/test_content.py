@@ -86,6 +86,12 @@ class ContentValidationTests(unittest.TestCase):
         scenarios = list_scenarios()
         self.assertEqual(len({item.id for item in scenarios}), len(scenarios))
         self.assertEqual(len({item.order for item in scenarios}), len(scenarios))
+        self.assertEqual(len({item.seed for item in scenarios}), len(scenarios))
+        fingerprints = {
+            (item.sun, item.allowed_plants, item.waves, repr(dict(item.modifiers)))
+            for item in scenarios
+        }
+        self.assertEqual(len(fingerprints), len(scenarios), "gameplay duplicates differ only in metadata")
         for scenario in scenarios:
             with self.subTest(scenario=scenario.id):
                 self.assertEqual(load_scenario(scenario.id), scenario)
