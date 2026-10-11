@@ -33,6 +33,7 @@ PLANT_COSTS: Dict[PlantType, int] = {
     PlantType.SUNFLOWER: 50,
     PlantType.WALL_NUT: 50,
     PlantType.CHOMPER: 150,
+    PlantType.SNOW_PEA: 175,
 }
 
 PLANT_COOLDOWNS: Dict[PlantType, float] = {
@@ -40,6 +41,7 @@ PLANT_COOLDOWNS: Dict[PlantType, float] = {
     PlantType.SUNFLOWER: 1.0,
     PlantType.WALL_NUT: 2.0,
     PlantType.CHOMPER: 7.0,
+    PlantType.SNOW_PEA: 2.0,
 }
 
 PLANT_HEALTH: Dict[PlantType, int] = {
@@ -47,6 +49,7 @@ PLANT_HEALTH: Dict[PlantType, int] = {
     PlantType.SUNFLOWER: 200,
     PlantType.WALL_NUT: 1200,
     PlantType.CHOMPER: 300,
+    PlantType.SNOW_PEA: 300,
 }
 
 ZOMBIE_HEALTH: Dict[ZombieType, int] = {
@@ -86,3 +89,5 @@ ZOMBIE_NAMES = {
     ZombieType.NORMAL: "Обычный", ZombieType.CONE: "Конус",
     ZombieType.BUCKET: "Ведро", ZombieType.RUNNER: "Бегун", ZombieType.SHIELD: "Щитоносец",
 }
+
+SLOW_DURATION = 4.0

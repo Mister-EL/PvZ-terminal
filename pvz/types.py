@@ -9,6 +9,7 @@ class PlantType(Enum):
     SUNFLOWER = "S"
     WALL_NUT = "W"
     CHOMPER = "C"
+    SNOW_PEA = "I"
 
 
 class ZombieType(Enum):
@@ -40,6 +41,7 @@ class Zombie:
     hp: float
     move_progress: float = 0.0
     shield_hp: float = 0.0
+    slowed_until: float = 0.0
 
     @property
     def char(self) -> str:
@@ -50,3 +52,4 @@ class Zombie:
 class Projectile:
     row: int
     col: float
+    slows: bool = False
