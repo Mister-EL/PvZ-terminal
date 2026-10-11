@@ -64,3 +64,9 @@ ZOMBIE_SCORE: Dict[ZombieType, int] = {
     ZombieType.CONE: 2,
     ZombieType.BUCKET: 3,
 }
+
+DIFFICULTIES = {
+    "easy": {"health": 0.75, "damage": 0.75, "speed": 0.85, "spawn": 1.25},
+    "normal": {"health": 1.0, "damage": 1.0, "speed": 1.0, "spawn": 1.0},
+    "hard": {"health": 1.25, "damage": 1.2, "speed": 1.15, "spawn": 0.8},
+}
