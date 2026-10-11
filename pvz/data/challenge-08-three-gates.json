@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "id": "challenge-08-three-gates",
+  "name": "Три воротца",
+  "kind": "challenge",
+  "chapter": "Испытания ближнего боя",
+  "order": 23,
+  "seed": 2423,
+  "sun": 550,
+  "allowed_plants": [
+    "WALL_NUT",
+    "CHOMPER",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 550,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 4,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 2,
+        "col": 4,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 4,
+        "col": 4,
+        "plant": "WALL_NUT"
+      }
+    ]
+  },
+  "description": "Атаки идут только по верхнему, среднему и нижнему рядам. Каждая цель требует отдельного решения.",
+  "objective": "Закрыть три направления фиксированным набором ловушек.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 38,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 54,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 26,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 44,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 30,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 52,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 70,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
