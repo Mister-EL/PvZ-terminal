@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "id": "campaign-15-last-bell",
+  "name": "Последний звонок",
+  "kind": "campaign",
+  "chapter": "5. Последний рубеж",
+  "order": 15,
+  "seed": 2415,
+  "sun": 500,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "SNOW_PEA",
+    "CHERRY_BOMB",
+    "REPEATER",
+    "POTATO_MINE",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "time_limit": 360,
+    "bonus_sun_per_wave": 125,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Финал кампании соединяет быстрые фланги, тяжёлый центр и ограничение времени.",
+  "objective": "Зачистить четыре волны раньше 360 секунд.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 50,
+          "row": 0,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 23,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 23,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 58,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 45,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 4
+    }
+  ]
+}
