@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "id": "challenge-07-demolition-derby",
+  "name": "Взрывной конвейер",
+  "kind": "challenge",
+  "chapter": "Испытания подрывника",
+  "order": 22,
+  "seed": 2422,
+  "sun": 400,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "CHERRY_BOMB",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "bonus_sun_per_wave": 150,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Группы из трёх соседних рядов возвращаются раз в волну. Бонус оплачивает следующую бомбу.",
+  "objective": "Снимать центральные группы площадным уроном и ловить одиночные фланги.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 48,
+          "row": 0,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 38,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 35,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 55,
+          "row": 4,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
