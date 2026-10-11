@@ -109,3 +109,26 @@ BOMB_FUSE = 1.2
 EXPLOSION_DAMAGE = 1800
 
 MINE_ARM_TIME = 12.0
+
+PLANT_NAMES = {
+    PlantType.PEASHOOTER: "Горохострел",
+    PlantType.SUNFLOWER: "Подсолнух",
+    PlantType.WALL_NUT: "Орех",
+    PlantType.CHOMPER: "Зубастик",
+    PlantType.SNOW_PEA: "Ледяной горох",
+    PlantType.CHERRY_BOMB: "Вишнёвая бомба",
+    PlantType.REPEATER: "Двойной горох",
+    PlantType.POTATO_MINE: "Картофельная мина",
+    PlantType.DOUBLE_SUNFLOWER: "Двойной подсолнух",
+}
+PLANT_DESCRIPTIONS = {
+    PlantType.PEASHOOTER: "20 урона каждые 0.8 с в своём ряду",
+    PlantType.SUNFLOWER: "+25 солнца каждые 4 с",
+    PlantType.WALL_NUT: "1200 здоровья: удерживает проход",
+    PlantType.CHOMPER: "Съедает зомби в клетке, затем жуёт 4 с",
+    PlantType.SNOW_PEA: "20 урона и замедление на 4 с; щит блокирует лёд",
+    PlantType.CHERRY_BOMB: "Взрыв через 1.2 с: 1800 урона в области 3×3",
+    PlantType.REPEATER: "Две горошины каждые 0.8 с",
+    PlantType.POTATO_MINE: "Готовится 12 с; взрыв при контакте в своём ряду",
+    PlantType.DOUBLE_SUNFLOWER: "+50 солнца каждые 4 с",
+}
