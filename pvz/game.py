@@ -57,6 +57,9 @@ class Game:
         self.zombies: List[Zombie] = []
         self.sun: int = scenario.sun if scenario else SUN_START
         self.score: int = 0
+        self.zombies_killed = 0
+        self.lawnmowers = [True] * GRID_HEIGHT
+        self.lawnmowers_used = 0
         self.selected: PlantType = PlantType.PEASHOOTER
         self.cursor_row = 2
         self.cursor_col = 1
@@ -243,8 +246,7 @@ class Game:
             if target:
                 target.hp -= PROJECTILE_DAMAGE
                 if target.hp <= 0:
-                    self.score += ZOMBIE_SCORE[target.zombie_type]
-                    self.zombies.remove(target)
+                    self.kill_zombie(target)
                 continue
             projectile.col = end_col
             if projectile.col < GRID_WIDTH:
@@ -268,8 +270,7 @@ class Game:
                     continue
                 target = self.find_zombie_in_cell(plant.row, plant.col)
                 if target:
-                    self.score += ZOMBIE_SCORE[target.zombie_type]
-                    self.zombies.remove(target)
+                    self.kill_zombie(target)
                     plant.chewing_until = self.time_elapsed + CHOMPER_CHEW_TIME
             # Подсолнух и Орех обрабатываются в других методах.
 
@@ -323,9 +324,24 @@ class Game:
                     self.add_sun(SUN_AMOUNT)
                     plant.last_action_time += SUNFLOWER_INTERVAL
 
+    def kill_zombie(self, zombie: Zombie) -> None:
+        if zombie in self.zombies:
+            self.score += ZOMBIE_SCORE[zombie.zombie_type]
+            self.zombies_killed += 1
+            self.zombies.remove(zombie)
+
     def check_loss(self) -> None:
-        for zombie in self.zombies:
-            if zombie.col < 0:
+        for zombie in list(self.zombies):
+            if zombie not in self.zombies or zombie.col >= 0:
+                continue
+            if self.lawnmowers[zombie.row]:
+                self.lawnmowers[zombie.row] = False
+                self.lawnmowers_used += 1
+                for target in list(self.zombies):
+                    if target.row == zombie.row:
+                        self.kill_zombie(target)
+                self.show_message(f"Газонокосилка спасла ряд {zombie.row + 1}")
+            else:
                 self.game_over = True
                 self.game_over_reason = "Game Over"
                 return
