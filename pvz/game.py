@@ -28,6 +28,7 @@ from .constants import (
     ZOMBIE_MOVE_INTERVAL,
     ZOMBIE_MOVE_INTERVALS,
     SHIELD_HEALTH,
+    SLOW_DURATION,
     ZOMBIE_SCORE,
 )
 from .grid import Grid
@@ -252,6 +253,8 @@ class Game:
                        and projectile.col <= z.col <= end_col and z.hp > 0]
             target = min(targets, key=lambda z: z.col, default=None)
             if target:
+                if projectile.slows and target.shield_hp <= 0:
+                    target.slowed_until = self.time_elapsed + SLOW_DURATION
                 self.damage_zombie(target, PROJECTILE_DAMAGE)
                 continue
             projectile.col = end_col
@@ -262,14 +265,14 @@ class Game:
 
     def handle_attacks(self) -> None:
         for plant in self.grid.iter_plants():
-            if plant.plant_type == PlantType.PEASHOOTER:
+            if plant.plant_type in (PlantType.PEASHOOTER, PlantType.SNOW_PEA):
                 if (
                     self.time_elapsed - plant.last_action_time >= PEASHOOTER_INTERVAL
                     and self.any_zombie_to_right(plant.row, plant.col)
                 ):
                     shot_col = plant.col + 1
                     if shot_col < GRID_WIDTH:
-                        self.projectiles.append(Projectile(row=plant.row, col=shot_col))
+                        self.projectiles.append(Projectile(row=plant.row, col=shot_col, slows=plant.plant_type == PlantType.SNOW_PEA))
                     plant.last_action_time = self.time_elapsed
             elif plant.plant_type == PlantType.CHOMPER:
                 if plant.is_chewing(self.time_elapsed):
@@ -292,13 +295,13 @@ class Game:
             plant = self.grid.get(zombie.row, zombie.col)
             if plant:
                 zombie.move_progress = 0.0
-                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self.tick_seconds
+                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self.tick_seconds * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
                 if plant.hp <= 0:
                     self.grid.remove(plant.row, plant.col)
                     self.plants_lost += 1
                 continue
 
-            zombie.move_progress += self.tick_seconds
+            zombie.move_progress += self.tick_seconds * (0.5 if zombie.slowed_until > self.time_elapsed else 1.0)
             move_interval = ZOMBIE_MOVE_INTERVALS[zombie.zombie_type] / self._difficulty["speed"]
             while zombie.move_progress + 1e-9 >= move_interval:
                 zombie.move_progress -= move_interval
