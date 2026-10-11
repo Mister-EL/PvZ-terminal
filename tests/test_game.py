@@ -37,5 +37,20 @@ class ProjectileTests(unittest.TestCase):
         self.assertFalse(game.projectiles)
 
 
+class ZombieMovementTests(unittest.TestCase):
+    def test_eating_does_not_charge_movement(self):
+        game = Game(0.2, seed=1)
+        game._next_spawn_time = 1000
+        zombie = Zombie(ZombieType.NORMAL, 0, 3, 200)
+        game.zombies.append(zombie)
+        game.grid.set(Plant(PlantType.WALL_NUT, 0, 3, 1200))
+        for _ in range(25):
+            game.spawn_and_move_zombies()
+        game.grid.remove(0, 3)
+        game.spawn_and_move_zombies()
+        self.assertEqual(zombie.col, 3)
+        self.assertAlmostEqual(zombie.move_progress, 0.2)
+
+
 if __name__ == '__main__':
     unittest.main()

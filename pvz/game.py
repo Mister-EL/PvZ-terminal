@@ -241,14 +241,15 @@ class Game:
             self.spawn_zombie()
 
         for zombie in list(self.zombies):
-            zombie.move_progress += self.tick_seconds
             plant = self.grid.get(zombie.row, zombie.col)
             if plant:
+                zombie.move_progress = 0.0
                 plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self.tick_seconds
                 if plant.hp <= 0:
                     self.grid.remove(plant.row, plant.col)
                 continue
 
+            zombie.move_progress += self.tick_seconds
             while zombie.move_progress >= ZOMBIE_MOVE_INTERVAL:
                 zombie.move_progress -= ZOMBIE_MOVE_INTERVAL
                 target_col = zombie.col - 1
