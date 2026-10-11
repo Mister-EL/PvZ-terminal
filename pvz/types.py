@@ -46,4 +46,4 @@ class Zombie:
 @dataclass
 class Projectile:
     row: int
-    col: int
+    col: float
