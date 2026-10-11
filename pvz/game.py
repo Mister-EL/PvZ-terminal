@@ -15,7 +15,7 @@ from .constants import (
     PLANT_COSTS,
     PLANT_HEALTH,
     PROJECTILE_DAMAGE,
-    PROJECTILE_SPEED_CELLS_PER_TICK,
+    PROJECTILE_SPEED_CELLS_PER_SECOND,
     STATUS_LINE_TEMPLATE,
     SUNFLOWER_INTERVAL,
     SUN_START,
@@ -196,18 +196,20 @@ class Game:
     def move_projectiles(self) -> None:
         new_projectiles: List[Projectile] = []
         for projectile in self.projectiles:
-            projectile.col += PROJECTILE_SPEED_CELLS_PER_TICK
-            if projectile.col >= GRID_WIDTH:
-                continue
-            target = self.find_zombie_in_cell(projectile.row, projectile.col)
+            end_col = projectile.col + PROJECTILE_SPEED_CELLS_PER_SECOND * self.tick_seconds
+            # Include the initial cell: a pea created next to a zombie must hit it.
+            targets = [z for z in self.zombies if z.row == projectile.row
+                       and projectile.col <= z.col <= end_col and z.hp > 0]
+            target = min(targets, key=lambda z: z.col, default=None)
             if target:
                 target.hp -= PROJECTILE_DAMAGE
                 if target.hp <= 0:
                     self.score += ZOMBIE_SCORE[target.zombie_type]
-                    if target in self.zombies:
-                        self.zombies.remove(target)
+                    self.zombies.remove(target)
                 continue
-            new_projectiles.append(projectile)
+            projectile.col = end_col
+            if projectile.col < GRID_WIDTH:
+                new_projectiles.append(projectile)
         self.projectiles = new_projectiles
         self.cleanup_dead_zombies()
 
