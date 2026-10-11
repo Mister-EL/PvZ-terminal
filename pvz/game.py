@@ -20,6 +20,8 @@ from .constants import (
     PROJECTILE_SPEED_CELLS_PER_SECOND,
     STATUS_LINE_TEMPLATE,
     SUNFLOWER_INTERVAL,
+    SKY_SUN_INTERVAL,
+    SUN_AMOUNT,
     SUN_START,
     ZOMBIE_DPS,
     ZOMBIE_HEALTH,
@@ -68,6 +70,8 @@ class Game:
             plant: 0.0 for plant in PlantType
         }
         self._next_spawn_time = 6.0
+        self._next_sky_sun = SKY_SUN_INTERVAL
+        self.sun_generated = 0
         self.seed = seed if seed is not None else (scenario.seed if scenario else None)
         self._rng = random.Random(self.seed)
         self._stdscr: Optional[curses.window] = None
@@ -216,7 +220,7 @@ class Game:
 
     # --- Обновление состояния -----------------------------------------------
     def update_timers(self) -> None:
-        now = time.monotonic()
+        now = self.time_elapsed
         if self.message and now > self._message_expires_at:
             self.message = None
 
@@ -300,12 +304,24 @@ class Game:
 
         self.cleanup_dead_plants()
 
+    def add_sun(self, amount: int) -> None:
+        previous = self.sun
+        self.sun += amount
+        cap = self.modifiers.get("sun_cap")
+        if cap is not None:
+            self.sun = min(self.sun, int(cap))
+        self.sun_generated += max(0, self.sun - previous)
+
     def generate_sun(self) -> None:
+        if self.modifiers.get("passive_sun", True):
+            while self.time_elapsed + 1e-9 >= self._next_sky_sun:
+                self.add_sun(SUN_AMOUNT)
+                self._next_sky_sun += SKY_SUN_INTERVAL
         for plant in self.grid.iter_plants():
             if plant.plant_type == PlantType.SUNFLOWER:
-                if self.time_elapsed - plant.last_action_time >= SUNFLOWER_INTERVAL:
-                    self.sun += 25
-                    plant.last_action_time = self.time_elapsed
+                while self.time_elapsed - plant.last_action_time + 1e-9 >= SUNFLOWER_INTERVAL:
+                    self.add_sun(SUN_AMOUNT)
+                    plant.last_action_time += SUNFLOWER_INTERVAL
 
     def check_loss(self) -> None:
         for zombie in self.zombies:
@@ -349,7 +365,7 @@ class Game:
                 self._scenario_complete = True
             else:
                 self.wave_number = self.scenario.waves[self._wave_index].number
-                self.sun += int(self.modifiers.get("bonus_sun_per_wave", 0))
+                self.add_sun(int(self.modifiers.get("bonus_sun_per_wave", 0)))
                 self.show_message(f"Волна {self.wave_number}/{self.wave_total}")
 
     def check_victory(self) -> None:
@@ -405,10 +421,10 @@ class Game:
     # --- Сообщения ----------------------------------------------------------
     def show_message(self, text: str) -> None:
         self.message = text
-        self._message_expires_at = time.monotonic() + MESSAGE_DURATION
+        self._message_expires_at = self.time_elapsed + MESSAGE_DURATION
 
     def current_message(self) -> str:
-        if self.message and time.monotonic() <= self._message_expires_at:
+        if self.message and self.time_elapsed <= self._message_expires_at:
             return self.message
         return ""
 
