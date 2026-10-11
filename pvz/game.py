@@ -29,6 +29,8 @@ from .constants import (
     ZOMBIE_MOVE_INTERVALS,
     SHIELD_HEALTH,
     SLOW_DURATION,
+    BOMB_FUSE,
+    EXPLOSION_DAMAGE,
     ZOMBIE_SCORE,
 )
 from .grid import Grid
@@ -274,6 +276,10 @@ class Game:
                     if shot_col < GRID_WIDTH:
                         self.projectiles.append(Projectile(row=plant.row, col=shot_col, slows=plant.plant_type == PlantType.SNOW_PEA))
                     plant.last_action_time = self.time_elapsed
+            elif plant.plant_type == PlantType.CHERRY_BOMB:
+                if self.time_elapsed - plant.last_action_time + 1e-9 >= BOMB_FUSE:
+                    self.explode(plant.row, plant.col)
+                    self.grid.remove(plant.row, plant.col)
             elif plant.plant_type == PlantType.CHOMPER:
                 if plant.is_chewing(self.time_elapsed):
                     continue
@@ -284,6 +290,12 @@ class Game:
             # Подсолнух и Орех обрабатываются в других методах.
 
         self.cleanup_dead_zombies()
+
+    def explode(self, row: int, col: int, *, adjacent_rows: bool = True) -> None:
+        for zombie in list(self.zombies):
+            if abs(zombie.col - col) <= 1 and (abs(zombie.row - row) <= 1 if adjacent_rows else zombie.row == row):
+                self.damage_zombie(zombie, EXPLOSION_DAMAGE, bypass_shield=True)
+        self.show_message("Бум!")
 
     def spawn_and_move_zombies(self) -> None:
         if self.scenario:
