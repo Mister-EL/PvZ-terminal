@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import curses
+import math
 import random
 import time
 from typing import Dict, List, Optional
 
 from .constants import (
     CHOMPER_CHEW_TIME,
+    DIFFICULTIES,
     GRID_HEIGHT,
     GRID_WIDTH,
     MESSAGE_DURATION,
@@ -29,12 +31,29 @@ from .types import Plant, PlantType, Projectile, Zombie, ZombieType
 
 
 class Game:
-    def __init__(self, tick_seconds: float, seed: Optional[int] = None) -> None:
+    def __init__(self, tick_seconds: float, seed: Optional[int] = None, *,
+                 difficulty: str = "normal", scenario=None) -> None:
+        if not math.isfinite(tick_seconds) or tick_seconds <= 0:
+            raise ValueError("tick_seconds must be positive and finite")
+        if difficulty not in DIFFICULTIES:
+            raise ValueError("Unknown difficulty")
         self.tick_seconds = tick_seconds
+        self.difficulty = difficulty
+        self._difficulty = DIFFICULTIES[difficulty]
+        self.scenario = scenario
+        self.modifiers = dict(scenario.modifiers) if scenario else {}
+        self.allowed_plants = tuple(PlantType[name] for name in scenario.allowed_plants) if scenario else tuple(PlantType)
+        self.victory = False
+        self.wave_number = scenario.waves[0].number if scenario and scenario.waves else 0
+        self.wave_total = len(scenario.waves) if scenario else 0
+        self._wave_index = 0
+        self._wave_start = 0.0
+        self._wave_spawn_index = 0
+        self._scenario_complete = bool(scenario and not scenario.waves)
         self.grid = Grid(GRID_WIDTH, GRID_HEIGHT)
         self.projectiles: List[Projectile] = []
         self.zombies: List[Zombie] = []
-        self.sun: int = SUN_START
+        self.sun: int = scenario.sun if scenario else SUN_START
         self.score: int = 0
         self.selected: PlantType = PlantType.PEASHOOTER
         self.cursor_row = 2
@@ -49,8 +68,12 @@ class Game:
             plant: 0.0 for plant in PlantType
         }
         self._next_spawn_time = 6.0
-        self._rng = random.Random(seed)
+        self.seed = seed if seed is not None else (scenario.seed if scenario else None)
+        self._rng = random.Random(self.seed)
         self._stdscr: Optional[curses.window] = None
+        for item in self.modifiers.get("preplanted", ()):
+            plant_type = PlantType[item["plant"]]
+            self.grid.set(Plant(plant_type, item["row"], item["col"], float(PLANT_HEALTH[plant_type])))
 
     # --- Жизненный цикл игры -------------------------------------------------
     def setup_curses(self, stdscr: curses.window) -> None:
@@ -98,13 +121,14 @@ class Game:
     def step(self) -> None:
         if self.paused or self.game_over:
             return
-        self.time_elapsed += self.tick_seconds
+        self.time_elapsed = round(self.time_elapsed + self.tick_seconds, 10)
         self.update_timers()
         self.move_projectiles()
         self.handle_attacks()
         self.spawn_and_move_zombies()
         self.generate_sun()
         self.check_loss()
+        self.check_victory()
 
     # --- Обработка ввода ----------------------------------------------------
     def process_input(self) -> None:
@@ -156,11 +180,14 @@ class Game:
         if self.paused or self.game_over:
             return
         plant_type = self.selected
+        if plant_type not in self.allowed_plants:
+            self.show_message("растение недоступно в этом испытании")
+            return
         row, col = self.cursor_row, self.cursor_col
         if self.grid.get(row, col):
             self.show_message("клетка занята")
             return
-        cost = PLANT_COSTS[plant_type]
+        cost = self.plant_cost(plant_type)
         if self.sun < cost:
             self.show_message("недостаточно Sun")
             return
@@ -245,21 +272,23 @@ class Game:
         self.cleanup_dead_zombies()
 
     def spawn_and_move_zombies(self) -> None:
-        if self.time_elapsed >= self._next_spawn_time:
+        if self.scenario:
+            self.spawn_scenario_zombies()
+        elif self.time_elapsed >= self._next_spawn_time:
             self.spawn_zombie()
 
         for zombie in list(self.zombies):
             plant = self.grid.get(zombie.row, zombie.col)
             if plant:
                 zombie.move_progress = 0.0
-                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self.tick_seconds
+                plant.hp -= ZOMBIE_DPS[zombie.zombie_type] * self._difficulty["damage"] * self.tick_seconds
                 if plant.hp <= 0:
                     self.grid.remove(plant.row, plant.col)
                 continue
 
             zombie.move_progress += self.tick_seconds
-            while zombie.move_progress >= ZOMBIE_MOVE_INTERVAL:
-                zombie.move_progress -= ZOMBIE_MOVE_INTERVAL
+            while zombie.move_progress + 1e-9 >= ZOMBIE_MOVE_INTERVAL / self._difficulty["speed"]:
+                zombie.move_progress -= ZOMBIE_MOVE_INTERVAL / self._difficulty["speed"]
                 target_col = zombie.col - 1
                 if target_col < 0:
                     zombie.col = target_col
@@ -293,11 +322,51 @@ class Game:
             zombie_type=z_type,
             row=row,
             col=GRID_WIDTH - 1,
-            hp=float(ZOMBIE_HEALTH[z_type]),
+            hp=float(ZOMBIE_HEALTH[z_type]) * self._difficulty["health"],
         )
         self.zombies.append(zombie)
         interval = 6.0 if self.time_elapsed < 60.0 else 3.0
-        self._next_spawn_time = self.time_elapsed + interval
+        self._next_spawn_time = self.time_elapsed + interval * self._difficulty["spawn"]
+
+    def spawn_scenario_zombies(self) -> None:
+        if self._scenario_complete:
+            return
+        wave = self.scenario.waves[self._wave_index]
+        elapsed = self.time_elapsed - self._wave_start
+        while self._wave_spawn_index < len(wave.spawns):
+            spawn = wave.spawns[self._wave_spawn_index]
+            if spawn.time > elapsed + 1e-9:
+                break
+            kind = ZombieType[spawn.zombie]
+            self.zombies.append(Zombie(kind, spawn.row, GRID_WIDTH - 1,
+                                       ZOMBIE_HEALTH[kind] * self._difficulty["health"]))
+            self._wave_spawn_index += 1
+        if self._wave_spawn_index == len(wave.spawns) and elapsed + 1e-9 >= wave.duration:
+            self._wave_index += 1
+            self._wave_start += wave.duration
+            self._wave_spawn_index = 0
+            if self._wave_index == len(self.scenario.waves):
+                self._scenario_complete = True
+            else:
+                self.wave_number = self.scenario.waves[self._wave_index].number
+                self.sun += int(self.modifiers.get("bonus_sun_per_wave", 0))
+                self.show_message(f"Волна {self.wave_number}/{self.wave_total}")
+
+    def check_victory(self) -> None:
+        if self.game_over or not self.scenario:
+            return
+        if self._scenario_complete and not self.zombies:
+            self.victory = True
+            self.game_over = True
+            self.game_over_reason = "Победа"
+            return
+        limit = self.modifiers.get("time_limit")
+        if limit is not None and self.time_elapsed >= float(limit):
+            self.game_over = True
+            self.game_over_reason = "Время вышло"
+
+    def plant_cost(self, plant_type: PlantType) -> int:
+        return max(0, round(PLANT_COSTS[plant_type] * float(self.modifiers.get("plant_cost_multiplier", 1.0))))
 
     def pick_zombie_type(self) -> ZombieType:
         shift_steps = int(self.time_elapsed // 45)
