@@ -37,6 +37,7 @@ PLANT_COSTS: Dict[PlantType, int] = {
     PlantType.CHERRY_BOMB: 150,
     PlantType.REPEATER: 200,
     PlantType.POTATO_MINE: 25,
+    PlantType.DOUBLE_SUNFLOWER: 125,
 }
 
 PLANT_COOLDOWNS: Dict[PlantType, float] = {
@@ -48,6 +49,7 @@ PLANT_COOLDOWNS: Dict[PlantType, float] = {
     PlantType.CHERRY_BOMB: 25.0,
     PlantType.REPEATER: 2.0,
     PlantType.POTATO_MINE: 15.0,
+    PlantType.DOUBLE_SUNFLOWER: 5.0,
 }
 
 PLANT_HEALTH: Dict[PlantType, int] = {
@@ -59,6 +61,7 @@ PLANT_HEALTH: Dict[PlantType, int] = {
     PlantType.CHERRY_BOMB: 300,
     PlantType.REPEATER: 300,
     PlantType.POTATO_MINE: 300,
+    PlantType.DOUBLE_SUNFLOWER: 250,
 }
 
 ZOMBIE_HEALTH: Dict[ZombieType, int] = {
