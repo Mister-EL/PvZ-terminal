@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "id": "challenge-01-last-coin",
+  "name": "Последняя монета",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 16,
+  "seed": 2416,
+  "sun": 650,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 650
+  },
+  "description": "Одного запаса должно хватить на всю оборону. Подсолнухов и пассивного солнца нет.",
+  "objective": "Выиграть с неизменяемым бюджетом в 650 солнца.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 28,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 44,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 52,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 16,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 52,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 64,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
