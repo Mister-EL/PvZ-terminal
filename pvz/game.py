@@ -267,14 +267,15 @@ class Game:
 
     def handle_attacks(self) -> None:
         for plant in self.grid.iter_plants():
-            if plant.plant_type in (PlantType.PEASHOOTER, PlantType.SNOW_PEA):
+            if plant.plant_type in (PlantType.PEASHOOTER, PlantType.SNOW_PEA, PlantType.REPEATER):
                 if (
                     self.time_elapsed - plant.last_action_time >= PEASHOOTER_INTERVAL
                     and self.any_zombie_to_right(plant.row, plant.col)
                 ):
                     shot_col = plant.col + 1
                     if shot_col < GRID_WIDTH:
-                        self.projectiles.append(Projectile(row=plant.row, col=shot_col, slows=plant.plant_type == PlantType.SNOW_PEA))
+                        for _ in range(2 if plant.plant_type == PlantType.REPEATER else 1):
+                            self.projectiles.append(Projectile(row=plant.row, col=shot_col, slows=plant.plant_type == PlantType.SNOW_PEA))
                     plant.last_action_time = self.time_elapsed
             elif plant.plant_type == PlantType.CHERRY_BOMB:
                 if self.time_elapsed - plant.last_action_time + 1e-9 >= BOMB_FUSE:
