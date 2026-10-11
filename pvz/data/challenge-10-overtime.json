@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "id": "challenge-10-overtime",
+  "name": "До звонка",
+  "kind": "challenge",
+  "chapter": "Испытания времени",
+  "order": 25,
+  "seed": 2425,
+  "sun": 500,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "REPEATER",
+    "CHERRY_BOMB",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "time_limit": 230,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ],
+    "plant_cost_multiplier": 1.15
+  },
+  "description": "Волны короткие, а после них остаётся мало времени на последнюю броню.",
+  "objective": "Закончить зачистку раньше 230 секунд.",
+  "waves": [
+    {
+      "duration": 50,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 35,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 38,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 28,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 45,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
