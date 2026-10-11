@@ -31,6 +31,7 @@ from .constants import (
     SLOW_DURATION,
     BOMB_FUSE,
     EXPLOSION_DAMAGE,
+    MINE_ARM_TIME,
     ZOMBIE_SCORE,
 )
 from .grid import Grid
@@ -277,6 +278,11 @@ class Game:
                         for _ in range(2 if plant.plant_type == PlantType.REPEATER else 1):
                             self.projectiles.append(Projectile(row=plant.row, col=shot_col, slows=plant.plant_type == PlantType.SNOW_PEA))
                     plant.last_action_time = self.time_elapsed
+            elif plant.plant_type == PlantType.POTATO_MINE:
+                if self.time_elapsed - plant.last_action_time + 1e-9 >= MINE_ARM_TIME:
+                    if self.find_zombie_in_cell(plant.row, plant.col):
+                        self.explode(plant.row, plant.col, adjacent_rows=False)
+                        self.grid.remove(plant.row, plant.col)
             elif plant.plant_type == PlantType.CHERRY_BOMB:
                 if self.time_elapsed - plant.last_action_time + 1e-9 >= BOMB_FUSE:
                     self.explode(plant.row, plant.col)

@@ -36,6 +36,7 @@ PLANT_COSTS: Dict[PlantType, int] = {
     PlantType.SNOW_PEA: 175,
     PlantType.CHERRY_BOMB: 150,
     PlantType.REPEATER: 200,
+    PlantType.POTATO_MINE: 25,
 }
 
 PLANT_COOLDOWNS: Dict[PlantType, float] = {
@@ -46,6 +47,7 @@ PLANT_COOLDOWNS: Dict[PlantType, float] = {
     PlantType.SNOW_PEA: 2.0,
     PlantType.CHERRY_BOMB: 25.0,
     PlantType.REPEATER: 2.0,
+    PlantType.POTATO_MINE: 15.0,
 }
 
 PLANT_HEALTH: Dict[PlantType, int] = {
@@ -56,6 +58,7 @@ PLANT_HEALTH: Dict[PlantType, int] = {
     PlantType.SNOW_PEA: 300,
     PlantType.CHERRY_BOMB: 300,
     PlantType.REPEATER: 300,
+    PlantType.POTATO_MINE: 300,
 }
 
 ZOMBIE_HEALTH: Dict[ZombieType, int] = {
@@ -100,3 +103,5 @@ SLOW_DURATION = 4.0
 
 BOMB_FUSE = 1.2
 EXPLOSION_DAMAGE = 1800
+
+MINE_ARM_TIME = 12.0
