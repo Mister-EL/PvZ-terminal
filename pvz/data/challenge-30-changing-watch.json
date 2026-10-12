@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "id": "challenge-30-changing-watch",
+  "name": "Сменяющийся дозор",
+  "kind": "challenge",
+  "chapter": "Испытания времени",
+  "order": 45,
+  "seed": 2445,
+  "sun": 350,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "time_limit": 180,
+    "bonus_sun_per_wave": 75,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Короткие волны меняют направление быстрее, чем длительная осада. Достраивать весь ряд после каждой атаки некогда.",
+  "objective": "Закончить четыре короткие волны до 180 секунд.",
+  "waves": [
+    {
+      "duration": 35,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 25,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 35,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 12,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 35,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 12,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 35,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 4
+    }
+  ]
+}
