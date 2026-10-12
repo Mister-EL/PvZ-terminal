@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "id": "challenge-16-forward-line",
+  "name": "Передовая грядка",
+  "kind": "challenge",
+  "chapter": "Испытания расстановки",
+  "order": 31,
+  "seed": 2431,
+  "sun": 175,
+  "allowed_plants": [
+    "SNOW_PEA",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 175,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 6,
+        "plant": "SNOW_PEA"
+      },
+      {
+        "row": 1,
+        "col": 6,
+        "plant": "SNOW_PEA"
+      },
+      {
+        "row": 2,
+        "col": 6,
+        "plant": "SNOW_PEA"
+      },
+      {
+        "row": 3,
+        "col": 6,
+        "plant": "SNOW_PEA"
+      },
+      {
+        "row": 4,
+        "col": 6,
+        "plant": "SNOW_PEA"
+      }
+    ]
+  },
+  "description": "Ледяные стрелки стоят почти у края появления. У бегуна мало времени попасть под их огонь.",
+  "objective": "Прикрыть передовую линию минной страховкой.",
+  "waves": [
+    {
+      "duration": 130,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 64,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 86,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 108,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 120,
+      "spawns": [
+        {
+          "time": 12,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 36,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 60,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 84,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 104,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
