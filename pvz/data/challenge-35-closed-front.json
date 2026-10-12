@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "id": "challenge-35-closed-front",
+  "name": "Закрытый передний край",
+  "kind": "challenge",
+  "chapter": "Испытания рельефа",
+  "order": 50,
+  "seed": 2450,
+  "sun": 600,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "REPEATER",
+    "SNOW_PEA",
+    "WALL_NUT",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "blocked_cells": [
+      {
+        "row": 0,
+        "col": 5
+      },
+      {
+        "row": 0,
+        "col": 6
+      },
+      {
+        "row": 0,
+        "col": 7
+      },
+      {
+        "row": 0,
+        "col": 8
+      },
+      {
+        "row": 1,
+        "col": 5
+      },
+      {
+        "row": 1,
+        "col": 6
+      },
+      {
+        "row": 1,
+        "col": 7
+      },
+      {
+        "row": 1,
+        "col": 8
+      },
+      {
+        "row": 2,
+        "col": 5
+      },
+      {
+        "row": 2,
+        "col": 6
+      },
+      {
+        "row": 2,
+        "col": 7
+      },
+      {
+        "row": 2,
+        "col": 8
+      },
+      {
+        "row": 3,
+        "col": 5
+      },
+      {
+        "row": 3,
+        "col": 6
+      },
+      {
+        "row": 3,
+        "col": 7
+      },
+      {
+        "row": 3,
+        "col": 8
+      },
+      {
+        "row": 4,
+        "col": 5
+      },
+      {
+        "row": 4,
+        "col": 6
+      },
+      {
+        "row": 4,
+        "col": 7
+      },
+      {
+        "row": 4,
+        "col": 8
+      }
+    ],
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Четыре правые колонки закрыты для посадки. Встречать врага взрывом прямо у появления нельзя.",
+  "objective": "Удержать заднюю половину и взрывать группы после подхода.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 35,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 35,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
