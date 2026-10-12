@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-38-five-platforms",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "CHOMPER",
+      "row": 0,
+      "col": 5
+    },
+    {
+      "time": 0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 5
+    },
+    {
+      "time": 2,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "time": 7,
+      "plant": "CHOMPER",
+      "row": 2,
+      "col": 5
+    },
+    {
+      "time": 14,
+      "plant": "CHOMPER",
+      "row": 4,
+      "col": 5
+    }
+  ]
+}
