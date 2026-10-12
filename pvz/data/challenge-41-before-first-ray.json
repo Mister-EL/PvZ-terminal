@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "challenge-41-before-first-ray",
+  "name": "До первого луча",
+  "kind": "challenge",
+  "chapter": "Испытания ритма",
+  "order": 56,
+  "seed": 2456,
+  "sun": 200,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT",
+    "POTATO_MINE",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "sky_sun_interval": 120,
+    "time_limit": 115,
+    "max_plants": 3
+  },
+  "description": "Первое солнце придёт только на 120-й секунде. Уровень должен закончиться раньше.",
+  "objective": "Зачистить шесть целей до 115 секунд без нового дохода.",
+  "waves": [
+    {
+      "duration": 50,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 35,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 50,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 25,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
