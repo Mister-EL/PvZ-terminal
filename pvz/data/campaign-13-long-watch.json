@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "id": "campaign-13-long-watch",
+  "name": "Долгая вахта",
+  "kind": "campaign",
+  "chapter": "5. Последний рубеж",
+  "order": 13,
+  "seed": 2413,
+  "sun": 450,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "SNOW_PEA",
+    "CHERRY_BOMB",
+    "REPEATER",
+    "POTATO_MINE",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ],
+    "bonus_sun_per_wave": 100
+  },
+  "description": "Пять волн меняют главный ряд атаки. Старая линия должна работать, пока строится следующая.",
+  "objective": "Сохранить оборону до конца длинной смены.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 32,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 44,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 17,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 29,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 44,
+          "row": 1,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 18,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 31,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 45,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 35,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 35,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 52,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 4
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 55,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 70,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 70,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 5
+    }
+  ]
+}
