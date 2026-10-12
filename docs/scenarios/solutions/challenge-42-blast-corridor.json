@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-42-blast-corridor",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 15,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 29,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 6
+    },
+    {
+      "time": 80,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 95,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 104,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 6
+    },
+    {
+      "time": 160,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 175,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 184,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 6
+    }
+  ]
+}
