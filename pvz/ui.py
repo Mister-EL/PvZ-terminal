@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import curses
 import time
+import textwrap
 import unicodedata
 
 from .constants import GRID_HEIGHT, GRID_WIDTH, PLANT_DESCRIPTIONS, PLANT_NAMES
@@ -147,7 +148,8 @@ class TerminalApp:
                     focused = i == selected
                     self.screen.put(5 + i - start, 4, ("> " if focused else "  ") + choices[i], curses.A_REVERSE if focused else 0)
                 if descriptions:
-                    self.screen.put(rows - 5, 4, descriptions[selected])
+                    for i, line in enumerate(textwrap.wrap(descriptions[selected], width=cols-9)[:3]):
+                        self.screen.put(rows - 6 + i, 4, line)
                 self.screen.put(rows - 3, 4, f"{selected+1}/{len(choices)}   Стрелки/W/S: выбрать   Enter: открыть   Q/Esc: назад")
                 self.window.refresh()
             key = self.window.getch()
@@ -167,18 +169,34 @@ class TerminalApp:
                 return selected
 
     def message(self, title, lines):
+        top = 0
         while True:
+            if not self.screen.playable:
+                self.screen.resize_notice()
+                key = self.window.getch()
+                if key in (27, ord("q"), ord("Q")):
+                    return False
+                continue
+            rows, cols = self.screen.size
+            wrapped = [part for line in lines for part in (textwrap.wrap(line, width=cols-7) or [""])]
+            page_size = rows - 6
+            top = min(top, max(0, len(wrapped) - page_size))
             self.window.erase()
             self.screen.put(1, 3, title, curses.A_BOLD)
-            for y, line in enumerate(lines, 3):
+            for y, line in enumerate(wrapped[top:top+page_size], 3):
                 self.screen.put(y, 3, line)
-            self.screen.put(self.screen.size[0] - 2, 3, "Enter: продолжить   Q/Esc: назад")
+            more = "   Стрелки: листать" if len(wrapped) > page_size else ""
+            self.screen.put(rows - 2, 3, "Enter: продолжить   Q/Esc: назад" + more)
             self.window.refresh()
             key = self.window.getch()
             if key in (10, 13, curses.KEY_ENTER, ord(" ")):
                 return True
             if key in (27, ord("q"), ord("Q")):
                 return False
+            if key in (curses.KEY_DOWN, curses.KEY_NPAGE, ord("s")):
+                top = min(max(0, len(wrapped) - page_size), top + (page_size if key == curses.KEY_NPAGE else 1))
+            elif key in (curses.KEY_UP, curses.KEY_PPAGE, ord("w")):
+                top = max(0, top - (page_size if key == curses.KEY_PPAGE else 1))
 
     def catalogue(self, kind):
         from .content import list_scenarios
