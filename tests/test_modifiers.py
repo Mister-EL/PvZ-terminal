@@ -54,5 +54,35 @@ class PlantLimitTests(unittest.TestCase):
             scenario(max_plants=1, preplanted=[{'row': 0, 'col': 0, 'plant': 'SUNFLOWER'}, {'row': 1, 'col': 0, 'plant': 'SUNFLOWER'}])
 
 
+class NoMowerTests(unittest.TestCase):
+    def test_disabled_mowers_lose_on_the_first_breach(self):
+        game = Game(.1, scenario=scenario(no_mowers=True))
+        self.assertEqual(game.lawnmowers, [False] * 5)
+        zombie = game.create_zombie(ZombieType.NORMAL, 2)
+        zombie.col = -1
+        game.zombies.append(zombie)
+        game.check_loss()
+        self.assertTrue(game.game_over)
+        self.assertEqual(game.game_over_reason, 'Game Over')
+        self.assertEqual(game.lawnmowers_used, 0)
+        self.assertEqual(game.zombies_killed, 0)
+
+    def test_explicit_false_and_default_keep_the_emergency_save(self):
+        for modifiers in ({}, {'no_mowers': False}):
+            game = Game(.1, scenario=scenario(**modifiers))
+            zombie = game.create_zombie(ZombieType.NORMAL, 2)
+            zombie.col = -1
+            game.zombies.append(zombie)
+            game.check_loss()
+            self.assertFalse(game.game_over)
+            self.assertEqual(game.lawnmowers_used, 1)
+            self.assertEqual(game.zombies_killed, 1)
+
+    def test_validator_requires_boolean(self):
+        for value in (1, 0, 'false', None):
+            with self.subTest(value=value), self.assertRaises(ContentError):
+                scenario(no_mowers=value)
+
+
 if __name__ == '__main__':
     unittest.main()
