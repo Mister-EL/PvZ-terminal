@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-41-before-first-ray",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 15,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 30,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 50,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 65,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 80,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    }
+  ]
+}
