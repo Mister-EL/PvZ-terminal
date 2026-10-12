@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+from copy import deepcopy
 import json
 import math
 import os
@@ -132,6 +133,59 @@ class ProgressStore:
             self.load_error = str(error)
             self._writable = False
         return self
+
+    def best_result(self, scenario_id: str, difficulty: str = "normal") -> dict[str, Any] | None:
+        result = self.data['results'].get(scenario_id, {}).get(difficulty)
+        return deepcopy(result) if result is not None else None
+
+    def record_result(self, scenario_id: str, difficulty: str, *, victory: bool,
+                      score: int, duration: float, kills: int = 0,
+                      plants_placed: int = 0, plants_lost: int = 0,
+                      lawnmowers_used: int = 0, sun_generated: int = 0) -> tuple[str, ...]:
+        if not self._writable:
+            raise ProgressError('Original progress was not verified; recording is disabled')
+        if not _valid_id(scenario_id) or difficulty not in DIFFICULTY_IDS:
+            raise ProgressError('Invalid scenario or difficulty')
+        if type(victory) is not bool or not _counter(score) or not _duration(duration):
+            raise ProgressError('Invalid match result')
+        stats = {'kills': kills, 'plants_placed': plants_placed, 'plants_lost': plants_lost,
+                 'lawnmowers_used': lawnmowers_used, 'sun_generated': sun_generated,
+                 'duration': float(duration)}
+        _validate_stats(stats)
+        if lawnmowers_used > 5:
+            raise ProgressError('Match statistics are contradictory')
+        staged = deepcopy(self.data)
+        difficulties = staged['results'].setdefault(scenario_id, {})
+        result = difficulties.get(difficulty)
+        run = {**stats, 'score': score, 'victory': victory}
+        if result is None:
+            result = {'attempts': 0, 'wins': 0, 'best_score': score, 'best_duration': None,
+                      'best_run': run, 'totals': {name: 0 for name in (*STAT_NAMES, 'duration')}}
+            difficulties[difficulty] = result
+        result['attempts'] += 1
+        result['wins'] += int(victory)
+        if score > result['best_score'] or (score == result['best_score'] and duration < result['best_run']['duration']):
+            result['best_score'] = score
+            result['best_run'] = run
+        if victory and (result['best_duration'] is None or duration < result['best_duration']):
+            result['best_duration'] = float(duration)
+        for name in (*STAT_NAMES, 'duration'):
+            result['totals'][name] += stats[name]
+        _validate_progress(staged)
+        self.data = staged
+        return ()
+
+    def record_game(self, game) -> tuple[str, ...]:
+        if not game.game_over:
+            raise ProgressError('A running match cannot be recorded')
+        if game.game_over_reason == "Выход":
+            return ()
+        scenario_id = game.scenario.id if game.scenario else 'survival'
+        return self.record_result(scenario_id, game.difficulty, victory=game.victory,
+                                  score=game.score, duration=game.time_elapsed,
+                                  kills=game.zombies_killed, plants_placed=game.plants_placed,
+                                  plants_lost=game.plants_lost, lawnmowers_used=game.lawnmowers_used,
+                                  sun_generated=game.sun_generated)
 
     def save(self) -> None:
         if not self._writable:
