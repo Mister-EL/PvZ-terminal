@@ -54,6 +54,7 @@ class Game:
         self.scenario = scenario
         self.modifiers = dict(scenario.modifiers) if scenario else {}
         self.allowed_plants = tuple(PlantType[name] for name in scenario.allowed_plants) if scenario else tuple(PlantType)
+        self.blocked_cells = frozenset((item["row"], item["col"]) for item in self.modifiers.get("blocked_cells", ()))
         self.victory = False
         self.wave_number = scenario.waves[0].number if scenario and scenario.waves else 0
         self.wave_total = len(scenario.waves) if scenario else 0
@@ -237,6 +238,8 @@ class Game:
             return "растение недоступно в этом испытании"
         if not self.grid.is_inside(self.cursor_row, self.cursor_col):
             return "клетка вне поля"
+        if (self.cursor_row, self.cursor_col) in self.blocked_cells:
+            return "клетка закрыта для посадки"
         if self.grid.get(self.cursor_row, self.cursor_col):
             return "клетка занята"
         limit = self.modifiers.get("max_plants")

@@ -109,7 +109,7 @@ def _key(value: Any, where: str, keys: frozenset[str]) -> str:
 
 def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, object]:
     where = "modifiers"
-    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants", "no_mowers"}
+    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants", "no_mowers", "blocked_cells"}
     data = _object(value, where, fields, set())
     result: dict[str, object] = {}
     if "passive_sun" in data:
@@ -136,6 +136,22 @@ def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, o
         result["plant_cost_multiplier"] = _number(data["plant_cost_multiplier"], "modifiers.plant_cost_multiplier", 0.25, 4)
     if "max_plants" in data:
         result["max_plants"] = _integer(data["max_plants"], "modifiers.max_plants", 1, 45)
+    blocked: set[tuple[int, int]] = set()
+    if "blocked_cells" in data:
+        cells = data["blocked_cells"]
+        if not isinstance(cells, list) or len(cells) > 45:
+            _fail(where, "blocked_cells must be a list of at most 45 cells")
+        parsed_cells = []
+        for index, item in enumerate(cells):
+            item_where = f"modifiers.blocked_cells[{index}]"
+            item = _object(item, item_where, {"row", "col"}, {"row", "col"})
+            row = _integer(item["row"], item_where + ".row", 0, 4)
+            col = _integer(item["col"], item_where + ".col", 0, 8)
+            if (row, col) in blocked:
+                _fail(item_where, "duplicate blocked cell")
+            blocked.add((row, col))
+            parsed_cells.append(MappingProxyType({"row": row, "col": col}))
+        result["blocked_cells"] = tuple(parsed_cells)
     if "preplanted" in data:
         plants = data["preplanted"]
         if not isinstance(plants, list) or len(plants) > 45:
@@ -152,6 +168,8 @@ def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, o
                 _fail(item_where, "preplanted plant must belong to allowed_plants")
             if (row, col) in occupied:
                 _fail(item_where, "cell is already occupied")
+            if (row, col) in blocked:
+                _fail(item_where, "preplanted cell is blocked")
             occupied.add((row, col))
             planted.append(MappingProxyType({"row": row, "col": col, "plant": plant}))
         if len(planted) > result.get("max_plants", 45):
