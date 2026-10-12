@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "id": "challenge-09-runner-patrol",
+  "name": "Беговой патруль",
+  "kind": "challenge",
+  "chapter": "Испытания скорости",
+  "order": 24,
+  "seed": 2424,
+  "sun": 400,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 500,
+    "bonus_sun_per_wave": 100,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Бегуны обходят все ряды, затем заходят парами. Бонусы помогают закрывать новые маршруты.",
+  "objective": "Встретить каждую быструю атаку подготовленной линией.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 28,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 48,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 25,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 25,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 48,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 48,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
