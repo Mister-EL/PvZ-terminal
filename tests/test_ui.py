@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from pvz.game import Game
+from pvz.content import load_scenario
 from pvz.ui import Screen, TerminalApp, clip_text, draw_game
 
 
@@ -52,6 +53,16 @@ class TerminalRenderingTests(unittest.TestCase):
         for slot in range(1, 10):
             self.assertTrue(any(s.startswith(str(slot)) for s in values))
         self.assertTrue(any("[ . ]" == s for s in values))
+
+    def test_closed_cells_and_live_plant_limit_are_visible(self):
+        closed = Game(.2, scenario=load_scenario('challenge-35-closed-front'))
+        window = Window(24, 76)
+        draw_game(window, closed)
+        self.assertTrue(any('#' in text for (y, x), text in window.lines.items() if 6 <= y <= 15))
+        limited = Game(.2, scenario=load_scenario('challenge-31-five-seats'))
+        self.assertTrue(limited.place_selected())
+        draw_game(window, limited)
+        self.assertIn('Растений 3/5', window.lines[17, 2])
 
     def test_restore_small_window_does_not_advance_stalled_time(self):
         class ResizingWindow(Window):

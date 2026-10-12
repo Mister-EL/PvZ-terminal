@@ -88,9 +88,10 @@ def draw_game(window, game, final=False):
             plant = game.grid.get(row, col)
             enemies = [z for z in game.zombies if z.row == row and z.col == col]
             flying = any(p.row == row and int(p.col) == col for p in game.projectiles)
-            glyph = plant.plant_type.value if plant else ("o" if flying else ".")
+            blocked = (row, col) in game.blocked_cells
+            glyph = plant.plant_type.value if plant else ("#" if blocked else ("o" if flying else "."))
             if enemies:
-                glyph = (glyph if plant else "") + enemies[0].char
+                glyph = (glyph if plant or blocked else "") + enemies[0].char
                 if len(enemies) > 1:
                     glyph += str(len(enemies))
             focused = (row, col) == (game.cursor_row, game.cursor_col) and not final
@@ -100,6 +101,18 @@ def draw_game(window, game, final=False):
                 detail = f"{enemies[0].hp + enemies[0].shield_hp:.0f}hp"
             screen.put(y + 1, x, detail)
     screen.put(16, 2, "---------+" + "------" * GRID_WIDTH)
+    limits = []
+    if game.modifiers.get("max_plants") is not None:
+        limits.append(f"Растений {sum(1 for _ in game.grid.iter_plants())}/{game.modifiers['max_plants']}")
+    if game.blocked_cells:
+        limits.append("# закрытая клетка")
+    if game.modifiers.get("sun_cap") is not None:
+        limits.append(f"Солнце ≤{game.modifiers['sun_cap']}")
+    if not game.modifiers.get("passive_sun", True):
+        limits.append("Без солнца с неба")
+    if game.modifiers.get("time_limit"):
+        limits.append(f"Осталось {max(0, game.modifiers['time_limit'] - game.time_elapsed):.0f}с")
+    screen.put(17, 2, " · ".join(limits))
     for slot, kind in enumerate(PlantType, 1):
         y, x = 18 + (slot - 1) // 3, 2 + ((slot - 1) % 3) * 24
         cooldown = game.cooldown_remaining(kind)
