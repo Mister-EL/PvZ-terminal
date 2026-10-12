@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-17-wave-payday",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 1,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 60,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 61,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 62,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 125,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 125,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 195,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 195,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 2
+    }
+  ]
+}
