@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "id": "challenge-14-sapper-battery",
+  "name": "Сапёрная батарея",
+  "kind": "challenge",
+  "chapter": "Испытания распределения",
+  "order": 29,
+  "seed": 2429,
+  "sun": 450,
+  "allowed_plants": [
+    "REPEATER",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 450,
+    "preplanted": [
+      {
+        "row": 1,
+        "col": 1,
+        "plant": "REPEATER"
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "plant": "REPEATER"
+      }
+    ]
+  },
+  "description": "Внутренние ряды уже прикрыты двойной очередью. На остальные направления хватает только ограниченного запаса.",
+  "objective": "Разделить работу стрелков и мин без источников дохода.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 34,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 48,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 56,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 56,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 54,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 54,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 25,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 42,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 60,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
