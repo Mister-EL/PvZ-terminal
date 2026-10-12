@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "id": "challenge-39-sparse-sky",
+  "name": "Редкое солнце",
+  "kind": "challenge",
+  "chapter": "Испытания ритма",
+  "order": 54,
+  "seed": 2454,
+  "sun": 200,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "sky_sun_interval": 30
+  },
+  "description": "Небо приносит солнце раз в 30 секунд, а подсолнухов в колоде нет.",
+  "objective": "Дополнять постоянный огонь дешёвыми ловушками между редкими поступлениями.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 52,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 52,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 72,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
