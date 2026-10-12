@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "id": "challenge-42-blast-corridor",
+  "name": "Коридор взрыва",
+  "kind": "challenge",
+  "chapter": "Испытания рельефа",
+  "order": 57,
+  "seed": 2457,
+  "sun": 650,
+  "allowed_plants": [
+    "POTATO_MINE",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 3,
+    "passive_sun": false,
+    "sun_cap": 650,
+    "blocked_cells": [
+      {
+        "row": 0,
+        "col": 0
+      },
+      {
+        "row": 0,
+        "col": 1
+      },
+      {
+        "row": 0,
+        "col": 2
+      },
+      {
+        "row": 0,
+        "col": 3
+      },
+      {
+        "row": 0,
+        "col": 5
+      },
+      {
+        "row": 0,
+        "col": 6
+      },
+      {
+        "row": 0,
+        "col": 7
+      },
+      {
+        "row": 0,
+        "col": 8
+      },
+      {
+        "row": 1,
+        "col": 0
+      },
+      {
+        "row": 1,
+        "col": 1
+      },
+      {
+        "row": 1,
+        "col": 2
+      },
+      {
+        "row": 1,
+        "col": 3
+      },
+      {
+        "row": 1,
+        "col": 4
+      },
+      {
+        "row": 1,
+        "col": 5
+      },
+      {
+        "row": 1,
+        "col": 6
+      },
+      {
+        "row": 1,
+        "col": 7
+      },
+      {
+        "row": 1,
+        "col": 8
+      },
+      {
+        "row": 2,
+        "col": 0
+      },
+      {
+        "row": 2,
+        "col": 1
+      },
+      {
+        "row": 2,
+        "col": 2
+      },
+      {
+        "row": 2,
+        "col": 3
+      },
+      {
+        "row": 2,
+        "col": 7
+      },
+      {
+        "row": 2,
+        "col": 8
+      },
+      {
+        "row": 3,
+        "col": 0
+      },
+      {
+        "row": 3,
+        "col": 1
+      },
+      {
+        "row": 3,
+        "col": 2
+      },
+      {
+        "row": 3,
+        "col": 3
+      },
+      {
+        "row": 3,
+        "col": 4
+      },
+      {
+        "row": 3,
+        "col": 5
+      },
+      {
+        "row": 3,
+        "col": 6
+      },
+      {
+        "row": 3,
+        "col": 7
+      },
+      {
+        "row": 3,
+        "col": 8
+      },
+      {
+        "row": 4,
+        "col": 0
+      },
+      {
+        "row": 4,
+        "col": 1
+      },
+      {
+        "row": 4,
+        "col": 2
+      },
+      {
+        "row": 4,
+        "col": 3
+      },
+      {
+        "row": 4,
+        "col": 5
+      },
+      {
+        "row": 4,
+        "col": 6
+      },
+      {
+        "row": 4,
+        "col": 7
+      },
+      {
+        "row": 4,
+        "col": 8
+      }
+    ]
+  },
+  "description": "Для бомбы доступны три клетки по центру, для мин — две фланговые площадки. Остальной газон закрыт.",
+  "objective": "Дождаться подхода групп к доступной зоне взрыва.",
+  "waves": [
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 25,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 25,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 25,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
