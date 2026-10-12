@@ -1,4 +1,5 @@
 import json
+from types import SimpleNamespace
 from pathlib import Path
 import tempfile
 import unittest
@@ -7,12 +8,14 @@ from unittest.mock import patch
 from pvz.progress import MAX_FILE_BYTES, ProgressError, ProgressStore
 
 
-class PersistenceTests(unittest.TestCase):
+class TempProgressTestCase(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.path = Path(self.temporary.name) / 'progress.json'
 
+
+class PersistenceTests(TempProgressTestCase):
     def test_missing_progress_has_empty_schema_and_roundtrips(self):
         store = ProgressStore(self.path).load()
         self.assertIsNone(store.load_error)
@@ -68,3 +71,60 @@ class PersistenceTests(unittest.TestCase):
     def test_unexpected_personal_fields_are_rejected(self):
         self.path.write_text(json.dumps({'version': 1, 'results': {}, 'achievements': [], 'email': 'personal'}))
         self.assertIsNotNone(ProgressStore(self.path).load().load_error)
+
+
+class ResultTests(TempProgressTestCase):
+    def test_results_keep_score_and_fastest_winning_duration_per_difficulty(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('campaign-01', 'normal', victory=False, score=12, duration=90, kills=12)
+        store.record_result('campaign-01', 'normal', victory=True, score=8, duration=80, kills=8)
+        store.record_result('campaign-01', 'normal', victory=True, score=10, duration=70, kills=10)
+        store.record_result('campaign-01', 'hard', victory=True, score=20, duration=120, kills=20)
+        store.save()
+        restored = ProgressStore(self.path).load()
+        result = restored.best_result('campaign-01', 'normal')
+        self.assertEqual((result['attempts'], result['wins'], result['best_score'], result['best_duration']), (3, 2, 12, 70))
+        self.assertEqual(result['totals']['kills'], 30)
+        self.assertEqual(restored.best_result('campaign-01', 'hard')['best_score'], 20)
+        result['wins'] = 99
+        self.assertEqual(restored.best_result('campaign-01', 'normal')['wins'], 2)
+
+    def test_invalid_stats_leave_existing_progress_unchanged(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('test', 'normal', victory=True, score=1, duration=20)
+        previous = json.dumps(store.data, sort_keys=True)
+        invalid = ({'duration': float('nan')}, {'score': -1}, {'plants_lost': -1}, {'lawnmowers_used': 6})
+        for changes in invalid:
+            values = {'victory': True, 'score': 1, 'duration': 20, **changes}
+            with self.assertRaises(ProgressError):
+                store.record_result('test', 'normal', **values)
+            self.assertEqual(json.dumps(store.data, sort_keys=True), previous)
+
+    def test_record_game_ignores_quit_and_rejects_running_match(self):
+        store = ProgressStore(self.path).load()
+        game = SimpleNamespace(game_over=False)
+        with self.assertRaises(ProgressError):
+            store.record_game(game)
+        game.game_over = True
+        game.game_over_reason = 'Выход'
+        self.assertEqual(store.record_game(game), ())
+        self.assertEqual(store.data['results'], {})
+
+    def test_record_game_maps_only_gameplay_fields(self):
+        store = ProgressStore(self.path).load()
+        game = SimpleNamespace(game_over=True, game_over_reason='Победа', scenario=SimpleNamespace(id='test'),
+            difficulty='normal', victory=True, score=10, time_elapsed=120,
+            zombies_killed=10, plants_placed=5, plants_lost=1, lawnmowers_used=0, sun_generated=400)
+        store.record_game(game)
+        store.save()
+        self.assertEqual(store.best_result('test')['wins'], 1)
+        raw = self.path.read_text()
+        self.assertNotIn('email', raw)
+        self.assertNotIn('timestamp', raw)
+        self.assertNotIn('seed', raw)
+
+    def test_losses_of_preplanted_plants_are_valid_statistics(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('preplanted-test', 'normal', victory=False, score=0, duration=20,
+                            plants_placed=0, plants_lost=5)
+        self.assertEqual(store.best_result('preplanted-test')['totals']['plants_lost'], 5)
