@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-12-cherry-tour",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 20.0,
+      "plant": "CHERRY_BOMB",
+      "row": 1,
+      "col": 7
+    },
+    {
+      "time": 65.0,
+      "plant": "CHERRY_BOMB",
+      "row": 3,
+      "col": 7
+    },
+    {
+      "time": 120.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    }
+  ]
+}

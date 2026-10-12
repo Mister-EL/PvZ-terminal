@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "id": "challenge-12-cherry-tour",
+  "name": "Вишнёвый маршрут",
+  "kind": "challenge",
+  "chapter": "Испытания точности",
+  "order": 27,
+  "seed": 2427,
+  "sun": 450,
+  "allowed_plants": [
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 450
+  },
+  "description": "Три группы проходят через разные части поля. В запасе ровно три бомбы.",
+  "objective": "Одним взрывом уничтожить каждую соседнюю тройку.",
+  "waves": [
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
