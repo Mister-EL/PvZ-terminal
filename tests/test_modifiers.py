@@ -84,5 +84,39 @@ class NoMowerTests(unittest.TestCase):
                 scenario(no_mowers=value)
 
 
+class BlockedCellTests(unittest.TestCase):
+    def test_blocked_placement_does_not_spend_sun_or_start_cooldown(self):
+        game = Game(.1, scenario=scenario(blocked_cells=[{'row': 2, 'col': 3}]))
+        self.assertEqual(game.blocked_cells, frozenset({(2, 3)}))
+        sun = game.sun
+        self.assertFalse(place(game, PlantType.PEASHOOTER, 2, 3))
+        self.assertIn('закрыта', game.planting_error())
+        self.assertEqual(game.sun, sun)
+        self.assertEqual(game.cooldown_remaining(PlantType.PEASHOOTER), 0)
+        self.assertTrue(place(game, PlantType.PEASHOOTER, 2, 2))
+
+    def test_zombies_can_cross_a_blocked_planting_cell(self):
+        game = Game(.1, scenario=scenario(blocked_cells=[{'row': 2, 'col': 3}]))
+        zombie = game.create_zombie(ZombieType.NORMAL, 2)
+        zombie.col, zombie.move_progress = 4, 3.6
+        game.zombies.append(zombie)
+        game.step()
+        self.assertEqual(zombie.col, 3)
+
+    def test_default_has_no_blocked_cells_and_input_cannot_mutate_scenario(self):
+        self.assertFalse(Game(.1, scenario=scenario()).blocked_cells)
+        source = [{'row': 2, 'col': 3}]
+        stage = scenario(blocked_cells=source)
+        source[0]['col'] = 4
+        self.assertEqual(Game(.1, scenario=stage).blocked_cells, frozenset({(2, 3)}))
+
+    def test_validator_rejects_collisions_and_out_of_lawn_cells(self):
+        for cells in ({}, [{'row': 5, 'col': 0}], [{'row': 0, 'col': 9}], [{'row': True, 'col': 0}], [{'row': 1, 'col': 1}, {'row': 1, 'col': 1}], [{'row': 0, 'col': 0, 'extra': True}]):
+            with self.subTest(cells=cells), self.assertRaises(ContentError):
+                scenario(blocked_cells=cells)
+        with self.assertRaises(ContentError):
+            scenario(blocked_cells=[{'row': 1, 'col': 1}], preplanted=[{'row': 1, 'col': 1, 'plant': 'SUNFLOWER'}])
+
+
 if __name__ == '__main__':
     unittest.main()
