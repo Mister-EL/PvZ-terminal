@@ -2,6 +2,8 @@ import copy
 import json
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 
 from pvz.replay import ReplayError, ReplayRecorder, load_replay, parse_replay, save_replay
@@ -219,6 +221,68 @@ class ReplayPlaybackTests(unittest.TestCase):
         from dataclasses import replace
         with self.assertRaises(ReplayError):
             play_replay(replace(parse_replay(recording()), seed=True))
+
+
+class ReplayCLITests(unittest.TestCase):
+    script = Path(__file__).resolve().parents[1] / "tools" / "replay.py"
+
+    def invoke(self, command, path, *, cwd=None):
+        return subprocess.run([sys.executable, str(self.script), command, str(path)],
+                              cwd=cwd, text=True, capture_output=True, timeout=10)
+
+    def test_validate_prints_json_format_summary_without_modifying_recording(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "party.json"
+            save_replay(parse_replay(recording()), path)
+            before = path.read_bytes()
+            process = self.invoke("validate", path)
+            self.assertEqual(process.returncode, 0, process.stderr)
+            summary = json.loads(process.stdout)
+            self.assertTrue(summary["format_valid"])
+            self.assertEqual(summary["actions"], 3)
+            self.assertEqual(summary["seed"], 42)
+            self.assertEqual(path.read_bytes(), before)
+            self.assertFalse(process.stderr)
+
+    def test_play_from_an_unrelated_cwd_prints_repeatable_headless_stats(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "party.json"
+            save_replay(parse_replay(recording()), path)
+            first = self.invoke("play", path, cwd=folder)
+            second = self.invoke("play", path, cwd=folder)
+            self.assertEqual(first.returncode, 0, first.stderr)
+            self.assertEqual(first.stdout, second.stdout)
+            result = json.loads(first.stdout)
+            self.assertEqual(result["stats"]["plants_placed"], 1)
+            self.assertEqual(result["stats"]["elapsed"], 1)
+            self.assertFalse(first.stderr)
+            self.assertEqual(list(Path(folder).iterdir()), [path])
+
+    def test_invalid_json_or_metadata_reports_error_without_traceback_or_data(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "party.json"
+            for payload in ("{", json.dumps(recording(player="do-not-print-this"))):
+                path.write_text(payload)
+                result = self.invoke("play", path)
+                self.assertEqual(result.returncode, 2)
+                self.assertFalse(result.stdout)
+                self.assertIn("Ошибка записи", result.stderr)
+                self.assertNotIn("Traceback", result.stderr)
+                self.assertNotIn("do-not-print-this", result.stderr)
+
+    def test_missing_file_is_a_clean_input_error(self):
+        with tempfile.TemporaryDirectory() as folder:
+            result = self.invoke("validate", Path(folder) / "missing.json")
+            self.assertEqual(result.returncode, 2)
+            self.assertFalse(result.stdout)
+            self.assertNotIn("Traceback", result.stderr)
+
+    def test_help_lists_supported_commands(self):
+        result = subprocess.run([sys.executable, str(self.script), "--help"],
+                                text=True, capture_output=True, timeout=10)
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("validate", result.stdout)
+        self.assertIn("play", result.stdout)
 
 
 if __name__ == "__main__":
