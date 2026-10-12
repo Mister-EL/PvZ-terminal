@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "id": "campaign-08-cherry-crossroads",
+  "name": "Вишнёвый перекрёсток",
+  "kind": "campaign",
+  "chapter": "3. Подземная работа",
+  "order": 8,
+  "seed": 2408,
+  "sun": 500,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHERRY_BOMB",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Три соседних ряда атакуют одновременно. Взрыв способен закрыть несколько угроз одной посадкой.",
+  "objective": "Разбирать группы, а не тратить бомбу на одиночную цель.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 18,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 18,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 18,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 38,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 28,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
