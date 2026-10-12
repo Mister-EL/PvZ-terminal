@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "challenge-23-biting-rear",
+  "name": "Кусающийся тыл",
+  "kind": "challenge",
+  "chapter": "Испытания ближнего боя",
+  "order": 38,
+  "seed": 2438,
+  "sun": 350,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "CHOMPER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Защита строится из обычных стрелков и хищников. Замедления и барьеров нет.",
+  "objective": "Прикрывать жевание дальним огнём и разбирать щиты в контакте.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 56,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 46,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 62,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 56,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 72,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
