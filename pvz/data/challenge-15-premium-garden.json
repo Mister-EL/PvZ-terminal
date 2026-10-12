@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "challenge-15-premium-garden",
+  "name": "Дорогие грядки",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 30,
+  "seed": 2430,
+  "sun": 250,
+  "allowed_plants": [
+    "DOUBLE_SUNFLOWER",
+    "REPEATER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 400,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Доступны только двойные подсолнухи и двойные горохострелы. Дешёвых промежуточных покупок нет.",
+  "objective": "Разворачивать дорогую оборону из дохода двойного сада.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 42,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 58,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 50,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 26,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 44,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 62,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}

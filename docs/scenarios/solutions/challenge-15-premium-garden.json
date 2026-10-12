@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-15-premium-garden",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 8.0,
+      "plant": "DOUBLE_SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 13.0,
+      "plant": "DOUBLE_SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 18.0,
+      "plant": "DOUBLE_SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 22.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 26.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 30.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 34.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 40.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 42.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 60.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 62.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 68.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 80.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 82.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 113.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 131.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 3
+    }
+  ]
+}
