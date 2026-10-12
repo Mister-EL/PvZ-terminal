@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-43-double-rent",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 20,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 35,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 80,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 90,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 140,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 150,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    }
+  ]
+}
