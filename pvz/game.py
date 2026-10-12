@@ -349,9 +349,9 @@ class Game:
                 self.add_sun(SUN_AMOUNT)
                 self._next_sky_sun += SKY_SUN_INTERVAL
         for plant in self.grid.iter_plants():
-            if plant.plant_type == PlantType.SUNFLOWER:
+            if plant.plant_type in (PlantType.SUNFLOWER, PlantType.DOUBLE_SUNFLOWER):
                 while self.time_elapsed - plant.last_action_time + 1e-9 >= SUNFLOWER_INTERVAL:
-                    self.add_sun(SUN_AMOUNT)
+                    self.add_sun(SUN_AMOUNT * (2 if plant.plant_type == PlantType.DOUBLE_SUNFLOWER else 1))
                     plant.last_action_time += SUNFLOWER_INTERVAL
 
     def kill_zombie(self, zombie: Zombie) -> None:
