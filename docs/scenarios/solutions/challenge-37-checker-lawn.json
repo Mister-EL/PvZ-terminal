@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-37-checker-lawn",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 1,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 2,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 3,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "time": 4,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 20,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 40,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 60,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 80,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 100,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 3
+    }
+  ]
+}
