@@ -1,5 +1,7 @@
 """Content checks run without curses or the simulation's evolving enums."""
 from copy import deepcopy
+import json
+from pathlib import Path
 import unittest
 
 from pvz.content import ContentError, campaign_chapters, list_scenarios, load_scenario, parse_scenario
@@ -98,6 +100,48 @@ class ContentValidationTests(unittest.TestCase):
                 self.assertGreaterEqual(scenario.waves[0].spawns[0].time, 15)
                 self.assertTrue(scenario.description)
                 self.assertTrue(scenario.objective)
+
+
+class ScenarioPlayabilityTests(unittest.TestCase):
+    def test_every_scenario_has_a_legal_winning_replay_at_supported_ticks(self):
+        # The fixture uses the public planting API: no health, sun, grid or
+        # enemy state is injected after construction. This catches balance
+        # changes that turn an otherwise valid JSON stage into a dead end.
+        from pvz.game import Game
+        from pvz.types import PlantType
+
+        folder = Path(__file__).resolve().parents[1] / "docs" / "scenarios" / "solutions"
+        scenarios = list_scenarios()
+        self.assertEqual({item.id for item in scenarios}, {item.stem for item in folder.glob("*.json")})
+        for scenario in scenarios:
+            fixture = json.loads((folder / (scenario.id + ".json")).read_text(encoding="utf-8"))
+            self.assertEqual(fixture["scenario"], scenario.id)
+            self.assertEqual(fixture["schema_version"], 1)
+            self.assertEqual(fixture["difficulty"], "normal")
+            actions = fixture["actions"]
+            self.assertTrue(actions, "a route must perform real player actions")
+            self.assertEqual([action["time"] for action in actions], sorted(action["time"] for action in actions))
+            for tick in (0.05, 0.1, 0.2, 0.5):
+                with self.subTest(scenario=scenario.id, tick=tick):
+                    game = Game(tick, scenario=scenario, difficulty=fixture["difficulty"])
+                    index = 0
+                    while not game.game_over and game.time_elapsed <= scenario.duration + 180:
+                        while index < len(actions) and actions[index]["time"] <= game.time_elapsed + 1e-9:
+                            action = actions[index]
+                            index += 1
+                            self.assertEqual(set(action), {"time", "plant", "row", "col"})
+                            self.assertIn(action["plant"], scenario.allowed_plants)
+                            game.selected = PlantType[action["plant"]]
+                            game.cursor_row = action["row"]
+                            game.cursor_col = action["col"]
+                            error = game.planting_error()
+                            self.assertTrue(game.place_selected(), f"illegal action {action}: {error}")
+                        game.step()
+                    self.assertTrue(game.victory, game.game_over_reason)
+                    self.assertEqual(game.zombies_killed, scenario.zombie_count)
+                    self.assertEqual(game.lawnmowers_used, 0)
+                    self.assertFalse(game.zombies)
+                    self.assertEqual(index, len(actions))
 
 
 if __name__ == "__main__":

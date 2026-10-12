@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scenario": "campaign-12-rich-soil",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 0.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 4.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 8.0,
+      "plant": "SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 12.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 13.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 16.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 20.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "time": 43.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 43.1,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 59.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 59.1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 65.1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 75.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 91.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 120.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 1
+    }
+  ]
+}

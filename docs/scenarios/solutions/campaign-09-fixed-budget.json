@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scenario": "campaign-09-fixed-budget",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 15.0,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 22.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 47.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 6
+    },
+    {
+      "time": 64.4,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 72.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 6
+    },
+    {
+      "time": 94.4,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 97.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 130.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 155.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 7
+    }
+  ]
+}

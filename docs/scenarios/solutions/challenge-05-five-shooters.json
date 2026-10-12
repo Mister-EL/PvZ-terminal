@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-05-five-shooters",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 1.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    }
+  ]
+}
