@@ -525,52 +525,9 @@ class Game:
 
     # --- Отрисовка ----------------------------------------------------------
     def render(self, final: bool = False) -> None:
-        if self._stdscr is None:
-            return
-
-        stdscr = self._stdscr
-        stdscr.erase()
-
-        status = STATUS_LINE_TEMPLATE.format(
-            sun=self.sun,
-            score=self.score,
-            sel=self.selected.value,
-        )
-        stdscr.addstr(0, 0, status)
-
-        for row in range(GRID_HEIGHT):
-            line_chars: List[str] = []
-            for col in range(GRID_WIDTH):
-                cell_char = "."
-                zombie = self.find_zombie_in_cell(row, col)
-                plant = self.grid.get(row, col)
-                if zombie:
-                    cell_char = zombie.char
-                elif plant:
-                    cell_char = plant.plant_type.value
-                elif any(p.row == row and p.col == col for p in self.projectiles):
-                    cell_char = "*"
-
-                if row == self.cursor_row and col == self.cursor_col and not final:
-                    line_chars.append(f"[{cell_char}]")
-                else:
-                    line_chars.append(f" {cell_char} ")
-            line = "".join(line_chars)
-            stdscr.addstr(row + 1, 0, line)
-
-        footer_row = GRID_HEIGHT + 1
-        message = ""
-        if final:
-            reason = self.game_over_reason or "Game Over"
-            message = f"{reason}! Итоговый счёт: {self.score}"
-        else:
-            message = self.current_message()
-            if self.paused:
-                pause_info = " [Пауза]"
-                message = (message + pause_info) if message else pause_info.strip()
-
-        stdscr.addstr(footer_row + 1, 0, message)
-        stdscr.refresh()
+        if self._stdscr is not None:
+            from .ui import draw_game
+            draw_game(self._stdscr, self, final)
 
     def wait_for_exit(self) -> None:
         if self._stdscr is None:
