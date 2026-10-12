@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "id": "challenge-17-wave-payday",
+  "name": "Солнце по расписанию",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 32,
+  "seed": 2432,
+  "sun": 200,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT",
+    "REPEATER",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "bonus_sun_per_wave": 300
+  },
+  "description": "Солнце выдаётся только при смене волны. Первую линию нужно оплатить из маленького начального запаса.",
+  "objective": "Расширять оборону после каждого бонуса.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 46,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 42,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 8,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 30,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 52,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 4
+    }
+  ]
+}
