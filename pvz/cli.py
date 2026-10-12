@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import argparse
 import curses
+import os
+from pathlib import Path
 import sys
 from typing import List, Optional
 
 from .content import ContentError, list_scenarios, load_scenario
 from .ui import TerminalApp
+from .progress import ProgressStore
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,6 +25,8 @@ def build_parser() -> argparse.ArgumentParser:
     modes.add_argument("--scenario", help="Начать сценарий по его идентификатору")
     modes.add_argument("--survival", action="store_true", help="Сразу начать выживание")
     modes.add_argument("--list-scenarios", action="store_true", help="Список сценариев без запуска терминального интерфейса")
+    parser.add_argument("--no-save", action="store_true", help="Играть без записи прогресса")
+    parser.add_argument("--progress-file", type=Path, help="Путь к файлу прогресса")
     parser.add_argument(
         "--tick-ms",
         type=int,
@@ -49,7 +54,13 @@ def main(argv: Optional[List[str]] = None) -> int:
         print("Для игры нужен интерактивный терминал. Список уровней: --list-scenarios", file=sys.stderr)
         return 2
     def launch(window):
-        app = TerminalApp(window, tick_seconds=args.tick_ms / 1000, seed=args.seed, difficulty=args.difficulty)
+        state_home = Path(os.environ.get("XDG_STATE_HOME", "")).expanduser()
+        if not state_home.is_absolute():
+            state_home = Path.home() / ".local" / "state"
+        progress = None if args.no_save else ProgressStore(args.progress_file or state_home / "pvz-terminal" / "progress.json").load()
+        app = TerminalApp(window, tick_seconds=args.tick_ms / 1000, seed=args.seed, difficulty=args.difficulty, progress=progress)
+        if progress and progress.load_error:
+            app.message("Файл прогресса не прочитан", ["Повреждённый файл останется без изменений.", "Играйте с --no-save или укажите другой --progress-file."])
         if args.scenario or args.survival:
             app.session(scenario)
         else:

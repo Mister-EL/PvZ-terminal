@@ -118,10 +118,11 @@ DIFFICULTY_NAMES = {"easy": "Лёгкая", "normal": "Обычная", "hard": 
 
 
 class TerminalApp:
-    def __init__(self, window, *, tick_seconds=.2, seed=None, difficulty="normal"):
+    def __init__(self, window, *, tick_seconds=.2, seed=None, difficulty="normal", progress=None):
         self.window = window
         self.screen = Screen(window)
         self.tick_seconds, self.seed, self.difficulty = tick_seconds, seed, difficulty
+        self.progress = progress
         window.keypad(True)
         window.timeout(100)
         try:
@@ -201,17 +202,24 @@ class TerminalApp:
     def catalogue(self, kind):
         from .content import list_scenarios
         scenarios = list_scenarios(kind)
-        labels = [f"{i+1:02}  {s.name}  /  {len(s.waves)} волн" for i, s in enumerate(scenarios)]
+        unlocked = set(self.progress.unlocked_campaign(scenarios, self.difficulty)) if self.progress and kind == "campaign" else {s.id for s in scenarios}
+        labels = []
+        for i, s in enumerate(scenarios):
+            mark = "закрыт" if s.id not in unlocked else ("пройден" if self.progress and self.progress.is_completed(s.id, self.difficulty) else f"{len(s.waves)} волн")
+            labels.append(f"{i+1:02}  {s.name}  /  {mark}")
         selected = self.choose("Кампания" if kind == "campaign" else "Испытания", labels, [s.description for s in scenarios])
         if selected is not None:
             scenario = scenarios[selected]
+            if scenario.id not in unlocked:
+                self.message("Уровень пока закрыт", ["Сначала завершите предыдущий уровень на этой сложности."])
+                return
             if self.message(scenario.name, [scenario.description, "", scenario.objective, "", f"Начальное солнце: {scenario.sun}", f"Врагов: {scenario.zombie_count}   Волны: {len(scenario.waves)}", "", "Первые враги придут после подготовки. Начните с защиты рядов."]):
                 self.session(scenario)
 
     def run(self):
         while True:
-            choice = self.choose("Защитите пять рядов до последнего зомби.", ["Кампания", "Испытания", "Выживание", "Сложность: " + DIFFICULTY_NAMES[self.difficulty], "Управление и растения", "Выход"])
-            if choice is None or choice == 5:
+            choice = self.choose("Защитите пять рядов до последнего зомби.", ["Кампания", "Испытания", "Выживание", "Сложность: " + DIFFICULTY_NAMES[self.difficulty], "Управление и растения", "Рекорды", "Достижения", "Выход"])
+            if choice is None or choice == 7:
                 return
             if choice in (0, 1):
                 self.catalogue("campaign" if choice == 0 else "challenge")
@@ -223,6 +231,33 @@ class TerminalApp:
                     self.difficulty = tuple(DIFFICULTY_NAMES)[index]
             elif choice == 4:
                 self.help()
+            elif choice == 5:
+                self.records()
+            elif choice == 6:
+                self.achievements()
+
+    def records(self):
+        if not self.progress:
+            self.message("Рекорды", ["Сохранение выключено: результаты этой игры не записываются."])
+            return
+        stats = self.progress.lifetime_stats()
+        from .content import list_scenarios
+        lines = [f"Победы: {stats['wins']} из {stats['attempts']} партий", f"Пройдено сценариев: {stats['completed_scenarios']}", f"Уничтожено зомби: {stats['kills']}   Получено солнца: {stats['sun_generated']}", "", "Рекорды на сложности: " + DIFFICULTY_NAMES[self.difficulty]]
+        for scenario in list_scenarios():
+            result = self.progress.best_result(scenario.id, self.difficulty)
+            if result:
+                duration = result['best_duration']
+                best = f"{duration:.1f}с" if duration is not None else "без победы"
+                lines.append(f"{scenario.name}: {result['best_score']} очков, {best}")
+        self.message("Рекорды", lines)
+
+    def achievements(self):
+        from .progress import ACHIEVEMENTS
+        earned = set(self.progress.achievements) if self.progress else set()
+        lines = []
+        for identifier, (name, description) in ACHIEVEMENTS.items():
+            lines.extend([("[+] " if identifier in earned else "[ ] ") + name, "    " + description, ""])
+        self.message(f"Достижения: {len(earned)}/{len(ACHIEVEMENTS)}", lines)
 
     def help(self):
         self.message("Управление", ["WASD или стрелки — выбрать клетку. 1–9 — выбрать растение.", "Пробел — посадить. R — выкопать без возврата солнца.", "P — пауза. ? — эта справка, время в ней остановлено.", "Q — вернуться в меню. Enter в меню — выбрать.", "", "P горох, S подсолнух, W орех, C зубастик, I лёд, X вишня,", "D двойной горох, M мина, F двойной подсолнух.", "", "z обычный, Z конус, B ведро, r бегун, H щитоносец.", "* слева — газонокосилка: одна последняя защита на ряд.", "hp под клеткой — здоровье растения или ближайшего врага.", "", "Защищайте все ряды. Подсолнухи приносят доход каждые4с.", "Мине нужно12с подготовки. Вишня взрывает область3×3.", "Щит блокирует лёд, но не контактные взрывы."])
@@ -234,6 +269,17 @@ class TerminalApp:
             self.play(game)
             if game.game_over_reason == "Выход":
                 return
+            earned = ()
+            if self.progress:
+                from .progress import ACHIEVEMENTS, ProgressError
+                try:
+                    earned = self.progress.record_game(game)
+                    self.progress.save()
+                except (ProgressError, OSError):
+                    earned = ()
+                    self.message("Прогресс не записан", ["Файл повреждён, изменён другой игрой или недоступен.", "Исходный файл сохранён. Можно играть с --no-save."])
+                if earned:
+                    self.message("Новые достижения", [ACHIEVEMENTS[item][0] + ": " + ACHIEVEMENTS[item][1] for item in earned])
             result = "Победа!" if game.victory else "Оборона прорвана"
             choice = self.choose(f"{result}   Счёт {game.score}   Время {game.time_elapsed:.1f}с", ["Повторить", "Вернуться в меню"], [f"Уничтожено{game.zombies_killed}, посажено{game.plants_placed}, потеряно{game.plants_lost}", f"Потрачено косилок: {game.lawnmowers_used}"])
             if choice != 0:
