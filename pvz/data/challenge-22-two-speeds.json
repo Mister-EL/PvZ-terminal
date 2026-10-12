@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "id": "challenge-22-two-speeds",
+  "name": "Два темпа",
+  "kind": "challenge",
+  "chapter": "Испытания приоритетов",
+  "order": 37,
+  "seed": 2437,
+  "sun": 400,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "REPEATER",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Бегун догоняет медленную броню в одном ряду. Обе цели нельзя считать одной обычной колонной.",
+  "objective": "Остановить быстрый контакт и затем продавить тяжёлую цель.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 44,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 52,
+          "row": 0,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 18,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 36,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 44,
+          "row": 1,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 16,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 44,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 62,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 62,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
