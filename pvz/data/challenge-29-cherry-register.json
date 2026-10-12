@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "id": "challenge-29-cherry-register",
+  "name": "Вишневая касса",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 44,
+  "seed": 2444,
+  "sun": 150,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "DOUBLE_SUNFLOWER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 150,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Запас вмещает ровно одну бомбу. Поступления идут быстро, но перезарядка остаётся общей.",
+  "objective": "Не потерять группу между последовательными взрывами.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 4
+    }
+  ]
+}
