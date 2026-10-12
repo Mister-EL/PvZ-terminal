@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "id": "challenge-05-five-shooters",
+  "name": "Пять стрелков",
+  "kind": "challenge",
+  "chapter": "Испытания огня",
+  "order": 20,
+  "seed": 2420,
+  "sun": 200,
+  "allowed_plants": [
+    "PEASHOOTER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 200,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      }
+    ]
+  },
+  "description": "По стрелку в каждом ряду уже есть. Остались два усиления на всё поле.",
+  "objective": "Выбрать нужные ряды для ограниченного подкрепления.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 28,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 44,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 52,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 32,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 44,
+          "row": 4,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 56,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 56,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
