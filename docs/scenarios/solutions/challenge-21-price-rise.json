@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-21-price-rise",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 1.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 2.0,
+      "plant": "SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 6.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 12.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 17.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 28.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 34.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "time": 52.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 53.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 70.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 76.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 81.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 88.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 100.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 135.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 1
+    }
+  ]
+}
