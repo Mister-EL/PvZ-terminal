@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "campaign-12-rich-soil",
+  "name": "Плодородная земля",
+  "kind": "campaign",
+  "chapter": "4. Железный квартал",
+  "order": 12,
+  "seed": 2412,
+  "sun": 350,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "SNOW_PEA",
+    "REPEATER",
+    "DOUBLE_SUNFLOWER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 800,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Двойные подсолнухи оплачивают тяжёлую оборону. Пассивного дохода нет, запас ограничен.",
+  "objective": "Построить устойчивый доход и остановить бронированную колонну.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 55,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 56,
+          "row": 1,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 22,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 39,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 56,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 70,
+          "row": 1,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
