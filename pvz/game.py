@@ -239,6 +239,9 @@ class Game:
             return "клетка вне поля"
         if self.grid.get(self.cursor_row, self.cursor_col):
             return "клетка занята"
+        limit = self.modifiers.get("max_plants")
+        if limit is not None and len(list(self.grid.iter_plants())) >= limit:
+            return f"лимит растений: {limit}"
         if self.sun < self.plant_cost(self.selected):
             return "недостаточно солнца"
         remaining = self.cooldown_remaining(self.selected)
