@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-45-closed-lanes",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 2,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 8,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 48,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 125,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 203,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    }
+  ]
+}

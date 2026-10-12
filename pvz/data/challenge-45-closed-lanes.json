@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "id": "challenge-45-closed-lanes",
+  "name": "Закрытые ряды",
+  "kind": "challenge",
+  "chapter": "Испытания рельефа",
+  "order": 60,
+  "seed": 2460,
+  "sun": 500,
+  "allowed_plants": [
+    "REPEATER",
+    "DOUBLE_SUNFLOWER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 5,
+    "passive_sun": false,
+    "blocked_cells": [
+      {
+        "row": 1,
+        "col": 0
+      },
+      {
+        "row": 1,
+        "col": 1
+      },
+      {
+        "row": 1,
+        "col": 2
+      },
+      {
+        "row": 1,
+        "col": 3
+      },
+      {
+        "row": 1,
+        "col": 4
+      },
+      {
+        "row": 1,
+        "col": 5
+      },
+      {
+        "row": 1,
+        "col": 6
+      },
+      {
+        "row": 1,
+        "col": 7
+      },
+      {
+        "row": 1,
+        "col": 8
+      },
+      {
+        "row": 3,
+        "col": 0
+      },
+      {
+        "row": 3,
+        "col": 1
+      },
+      {
+        "row": 3,
+        "col": 2
+      },
+      {
+        "row": 3,
+        "col": 3
+      },
+      {
+        "row": 3,
+        "col": 4
+      },
+      {
+        "row": 3,
+        "col": 5
+      },
+      {
+        "row": 3,
+        "col": 6
+      },
+      {
+        "row": 3,
+        "col": 7
+      },
+      {
+        "row": 3,
+        "col": 8
+      }
+    ],
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Во 2-м и 4-м рядах посадка запрещена целиком. Врагов там достанет только атака из соседнего ряда.",
+  "objective": "Обстреливать доступные направления и взрывать закрытые ряды снаружи.",
+  "waves": [
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 45,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 45,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 47,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 47,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 15,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 15,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 15,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 45,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 45,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 42,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 42,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
