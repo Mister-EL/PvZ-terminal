@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scenario": "campaign-13-long-watch",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 2,
+      "col": 0
+    },
+    {
+      "time": 0.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 1.0,
+      "plant": "SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 4.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 8.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 12.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 16.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "time": 25.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 25.1,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 37.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 37.1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 65.1,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "SNOW_PEA",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 66.1,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 90.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 292.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 340.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    }
+  ]
+}

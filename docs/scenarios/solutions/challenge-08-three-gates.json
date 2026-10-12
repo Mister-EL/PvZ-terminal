@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-08-three-gates",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "CHOMPER",
+      "row": 0,
+      "col": 6
+    },
+    {
+      "time": 0.0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 7.0,
+      "plant": "CHOMPER",
+      "row": 2,
+      "col": 6
+    },
+    {
+      "time": 14.0,
+      "plant": "CHOMPER",
+      "row": 4,
+      "col": 6
+    }
+  ]
+}

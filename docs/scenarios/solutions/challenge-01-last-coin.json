@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-01-last-coin",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 1.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 2.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 3.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 4.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 60,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 75,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 90,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    }
+  ]
+}

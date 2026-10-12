@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-07-demolition-derby",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 1.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 15.0,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 22.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 48.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 7
+    },
+    {
+      "time": 75.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 103.0,
+      "plant": "CHERRY_BOMB",
+      "row": 3,
+      "col": 7
+    },
+    {
+      "time": 143.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 170.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 7
+    },
+    {
+      "time": 195.0,
+      "plant": "CHERRY_BOMB",
+      "row": 3,
+      "col": 6
+    }
+  ]
+}

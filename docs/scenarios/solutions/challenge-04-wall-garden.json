@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-04-wall-garden",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "CHOMPER",
+      "row": 1,
+      "col": 6
+    },
+    {
+      "time": 0.0,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 1.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 7.0,
+      "plant": "CHOMPER",
+      "row": 3,
+      "col": 6
+    },
+    {
+      "time": 14.0,
+      "plant": "CHOMPER",
+      "row": 0,
+      "col": 6
+    },
+    {
+      "time": 15.0,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 21.0,
+      "plant": "CHOMPER",
+      "row": 4,
+      "col": 6
+    },
+    {
+      "time": 28.0,
+      "plant": "CHOMPER",
+      "row": 2,
+      "col": 6
+    }
+  ]
+}

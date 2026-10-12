@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scenario": "campaign-02-sun-harvest",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 1.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 2.0,
+      "plant": "SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 6.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 10.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 14.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 25.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 26.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 37.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 38.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 50.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 51.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 66.1,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 67.1,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 83.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 97.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 3
+    }
+  ]
+}
