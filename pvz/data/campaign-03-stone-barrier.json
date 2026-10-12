@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "id": "campaign-03-stone-barrier",
+  "name": "Крепкий орех",
+  "kind": "campaign",
+  "chapter": "1. Зелёный квартал",
+  "order": 3,
+  "seed": 2403,
+  "sun": 350,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Конусы идут плотной колонной по центру, а крайние ряды отвлекают одиночными врагами.",
+  "objective": "Удержать центральный ряд, не оставив фланги пустыми.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 27,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 38,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 48,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 14,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 38,
+          "row": 4,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 50,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 17,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 44,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 54,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
