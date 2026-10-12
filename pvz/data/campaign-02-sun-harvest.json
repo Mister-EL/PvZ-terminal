@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "campaign-02-sun-harvest",
+  "name": "Солнечный урожай",
+  "kind": "campaign",
+  "chapter": "1. Зелёный квартал",
+  "order": 2,
+  "seed": 2402,
+  "sun": 250,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Небо больше не даёт солнце. За оборону платит собственная грядка.",
+  "objective": "Вырастить экономику и пережить три волны без пассивного дохода.",
+  "waves": [
+    {
+      "duration": 55,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 35,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 35,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 36,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 48,
+          "row": 4,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 58,
+          "row": 2,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
