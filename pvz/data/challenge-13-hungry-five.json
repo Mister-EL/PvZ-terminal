@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "id": "challenge-13-hungry-five",
+  "name": "Голодная пятёрка",
+  "kind": "challenge",
+  "chapter": "Испытания ближнего боя",
+  "order": 28,
+  "seed": 2428,
+  "sun": 750,
+  "allowed_plants": [
+    "CHOMPER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 750
+  },
+  "description": "Пять хищников должны удержать поле без солнца и других растений.",
+  "objective": "Поставить по хищнику в каждом ряду и пережить три волны.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 50,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 60,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 34,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 46,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 58,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 32,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 44,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 56,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
