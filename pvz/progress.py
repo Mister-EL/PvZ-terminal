@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 import re
 import tempfile
-from typing import Any
+from typing import Any, Iterable
 
 SCHEMA_VERSION = 1
 MAX_FILE_BYTES = 1_048_576
@@ -137,6 +137,23 @@ class ProgressStore:
     def best_result(self, scenario_id: str, difficulty: str = "normal") -> dict[str, Any] | None:
         result = self.data['results'].get(scenario_id, {}).get(difficulty)
         return deepcopy(result) if result is not None else None
+
+    def is_completed(self, scenario_id: str, difficulty: str = "normal") -> bool:
+        result = self.data['results'].get(scenario_id, {}).get(difficulty)
+        return bool(result and result['wins'] > 0)
+
+    def unlocked_campaign(self, scenarios: Iterable[Any], difficulty: str = "normal") -> tuple[str, ...]:
+        if difficulty not in DIFFICULTY_IDS:
+            raise ProgressError('Invalid campaign difficulty')
+        ids = [scenario if isinstance(scenario, str) else scenario.id for scenario in scenarios]
+        if any(not _valid_id(item) for item in ids) or len(set(ids)) != len(ids):
+            raise ProgressError('Invalid campaign sequence')
+        unlocked = []
+        for scenario_id in ids:
+            unlocked.append(scenario_id)
+            if not self.is_completed(scenario_id, difficulty):
+                break
+        return tuple(unlocked)
 
     def record_result(self, scenario_id: str, difficulty: str, *, victory: bool,
                       score: int, duration: float, kills: int = 0,
