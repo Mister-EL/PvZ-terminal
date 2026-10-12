@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "challenge-20-nut-position",
+  "name": "Точка опоры",
+  "kind": "challenge",
+  "chapter": "Испытания расстановки",
+  "order": 35,
+  "seed": 2435,
+  "sun": 50,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 50,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      }
+    ]
+  },
+  "description": "Один центральный стрелок встречает два ведра. На дополнительный урон денег не хватит.",
+  "objective": "Выбрать позицию единственного ореха и дать стрелку время.",
+  "waves": [
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 35,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 1
+    }
+  ]
+}
