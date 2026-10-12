@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-19-one-cherry",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 78,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    }
+  ]
+}

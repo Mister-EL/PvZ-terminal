@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "id": "challenge-19-one-cherry",
+  "name": "Одна вишня",
+  "kind": "challenge",
+  "chapter": "Испытания резерва",
+  "order": 34,
+  "seed": 2434,
+  "sun": 150,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 150,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "plant": "PEASHOOTER"
+      }
+    ]
+  },
+  "description": "Готовая гороховая линия переживает начало. Единственную бомбу нужно сохранить для плотной брони.",
+  "objective": "Не потратить 150 солнца до решающей центральной группы.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 28,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 44,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 52,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 13,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 13,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 13,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
