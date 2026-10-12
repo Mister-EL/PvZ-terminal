@@ -109,7 +109,7 @@ def _key(value: Any, where: str, keys: frozenset[str]) -> str:
 
 def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, object]:
     where = "modifiers"
-    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants", "no_mowers", "blocked_cells"}
+    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants", "no_mowers", "blocked_cells", "sky_sun_interval"}
     data = _object(value, where, fields, set())
     result: dict[str, object] = {}
     if "passive_sun" in data:
@@ -134,6 +134,8 @@ def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, o
         result["bonus_sun_per_wave"] = _integer(data["bonus_sun_per_wave"], "modifiers.bonus_sun_per_wave", 0, 10000)
     if "plant_cost_multiplier" in data:
         result["plant_cost_multiplier"] = _number(data["plant_cost_multiplier"], "modifiers.plant_cost_multiplier", 0.25, 4)
+    if "sky_sun_interval" in data:
+        result["sky_sun_interval"] = _number(data["sky_sun_interval"], "modifiers.sky_sun_interval", 1, 120)
     if "max_plants" in data:
         result["max_plants"] = _integer(data["max_plants"], "modifiers.max_plants", 1, 45)
     blocked: set[tuple[int, int]] = set()

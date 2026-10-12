@@ -118,5 +118,44 @@ class BlockedCellTests(unittest.TestCase):
             scenario(blocked_cells=[{'row': 1, 'col': 1}], preplanted=[{'row': 1, 'col': 1, 'plant': 'SUNFLOWER'}])
 
 
+class SkySunIntervalTests(unittest.TestCase):
+    def test_custom_interval_arrives_exactly_at_the_boundary(self):
+        game = Game(.2, scenario=scenario(sky_sun_interval=3))
+        self.assertEqual(game.sky_sun_interval, 3)
+        for _ in range(14):
+            game.step()
+        self.assertEqual(game.sun, 500)
+        game.step()
+        self.assertEqual(game.sun, 525)
+
+    def test_custom_interval_is_independent_of_ui_tick(self):
+        for tick in (.05, .2, .5, 4):
+            with self.subTest(tick=tick):
+                game = Game(tick, scenario=scenario(sky_sun_interval=3))
+                for _ in range(round(12 / tick)):
+                    game.step()
+                self.assertEqual(game.sun, 600)
+                self.assertEqual(game.sun_generated, 100)
+
+    def test_disabling_passive_income_wins_over_custom_interval(self):
+        game = Game(1, scenario=scenario(sky_sun_interval=1, passive_sun=False))
+        for _ in range(10):
+            game.step()
+        self.assertEqual(game.sun, 500)
+
+    def test_default_remains_eight_seconds(self):
+        game = Game(1, scenario=scenario())
+        self.assertEqual(game.sky_sun_interval, 8)
+        for _ in range(8):
+            game.step()
+        self.assertEqual(game.sun, 525)
+
+    def test_validator_bounds_interval_and_rejects_nonfinite_values(self):
+        for value in (0, 121, True, float('nan'), float('inf'), '3'):
+            with self.subTest(value=value), self.assertRaises(ContentError):
+                scenario(sky_sun_interval=value)
+        self.assertEqual(scenario(sky_sun_interval=2.5).modifiers['sky_sun_interval'], 2.5)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -85,7 +85,8 @@ class Game:
             plant: 0.0 for plant in PlantType
         }
         self._next_spawn_time = 6.0
-        self._next_sky_sun = SKY_SUN_INTERVAL
+        self.sky_sun_interval = float(self.modifiers.get("sky_sun_interval", SKY_SUN_INTERVAL))
+        self._next_sky_sun = self.sky_sun_interval
         self.sun_generated = 0
         self.seed = seed if seed is not None else (scenario.seed if scenario else None)
         self._rng = random.Random(self.seed)
@@ -387,7 +388,7 @@ class Game:
         if self.modifiers.get("passive_sun", True):
             while self.time_elapsed + 1e-9 >= self._next_sky_sun:
                 self.add_sun(SUN_AMOUNT)
-                self._next_sky_sun += SKY_SUN_INTERVAL
+                self._next_sky_sun += self.sky_sun_interval
         for plant in self.grid.iter_plants():
             if plant.plant_type in (PlantType.SUNFLOWER, PlantType.DOUBLE_SUNFLOWER):
                 while self.time_elapsed - plant.last_action_time + 1e-9 >= SUNFLOWER_INTERVAL:
