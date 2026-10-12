@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "id": "campaign-14-split-horizon",
+  "name": "Два горизонта",
+  "kind": "campaign",
+  "chapter": "5. Последний рубеж",
+  "order": 14,
+  "seed": 2414,
+  "sun": 450,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "SNOW_PEA",
+    "CHERRY_BOMB",
+    "REPEATER",
+    "POTATO_MINE",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 600,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Края получают быстрые атаки, центр — тяжёлые. Вся экономика живёт на двух флангах.",
+  "objective": "Защитить источники дохода и три направления атаки.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 36,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 24,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 25,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 25,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 46,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 18,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 18,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 38,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 58,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 4
+    }
+  ]
+}
