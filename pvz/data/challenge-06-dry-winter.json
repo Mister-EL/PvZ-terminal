@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "id": "challenge-06-dry-winter",
+  "name": "Сухая зима",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 21,
+  "seed": 2421,
+  "sun": 250,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 250,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Ледяная оборона стоит дорого, а запас ограничен 250. Новый стрелок требует регулярного дохода.",
+  "objective": "Поочерёдно разворачивать ледяные ряды при низком запасе.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 48,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 64,
+          "row": 3,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 12,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 32,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 50,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 66,
+          "row": 1,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 26,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 44,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 62,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
