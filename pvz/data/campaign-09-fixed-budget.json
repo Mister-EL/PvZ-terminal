@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "id": "campaign-09-fixed-budget",
+  "name": "Сапёрный лимит",
+  "kind": "campaign",
+  "chapter": "3. Подземная работа",
+  "order": 9,
+  "seed": 2409,
+  "sun": 1100,
+  "allowed_plants": [
+    "WALL_NUT",
+    "CHERRY_BOMB",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 1100
+  },
+  "description": "Подкрепления не приносят солнце. В распоряжении только мины, бомбы и барьеры.",
+  "objective": "Пережить три волны, расходуя фиксированный бюджет.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 42,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 50,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 34,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 34,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 34,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 45,
+          "row": 4,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
