@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pvz-terminal"
+version = "0.2.0"
+description = "A terminal lane-defense game with a campaign and tactical challenges"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: POSIX",
+  "Environment :: Console :: Curses",
+  "Topic :: Games/Entertainment :: Arcade",
+]
+
+[project.scripts]
+pvz-terminal = "pvz.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Mister-EL/PvZ-terminal"
+
+[tool.setuptools]
+packages = ["pvz", "pvz.data"]
+include-package-data = false
+
+[tool.setuptools.package-data]
+"pvz.data" = ["campaign-*.json", "challenge-*.json"]
