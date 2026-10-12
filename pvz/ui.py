@@ -288,10 +288,14 @@ class TerminalApp:
     def play(self, game):
         previous = time.monotonic()
         accumulator = 0.0
+        was_playable = self.screen.playable
         while not game.game_over:
             now = time.monotonic()
             delta, previous = min(now - previous, .5), now
             playable = self.screen.playable
+            if playable and not was_playable:
+                delta, accumulator = 0.0, 0.0
+            was_playable = playable
             if playable and not game.paused:
                 accumulator += delta
                 while accumulator >= game.tick_seconds and not game.game_over:

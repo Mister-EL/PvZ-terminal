@@ -1,7 +1,8 @@
 import unittest
+from unittest.mock import patch
 
 from pvz.game import Game
-from pvz.ui import Screen, clip_text, draw_game
+from pvz.ui import Screen, TerminalApp, clip_text, draw_game
 
 
 class Window:
@@ -51,3 +52,26 @@ class TerminalRenderingTests(unittest.TestCase):
         for slot in range(1, 10):
             self.assertTrue(any(s.startswith(str(slot)) for s in values))
         self.assertTrue(any("[ . ]" == s for s in values))
+
+    def test_restore_small_window_does_not_advance_stalled_time(self):
+        class ResizingWindow(Window):
+            def __init__(self):
+                super().__init__(8, 20)
+                self.reads = 0
+
+            def keypad(self, value):
+                pass
+
+            def timeout(self, value):
+                pass
+
+            def getch(self):
+                self.reads += 1
+                self.rows, self.cols = 24, 76
+                return -1 if self.reads == 1 else ord('q')
+
+        window = ResizingWindow()
+        game = Game(.2, 1)
+        with patch('pvz.ui.curses.curs_set'), patch('pvz.ui.time.monotonic', side_effect=[0, 1, 2]):
+            TerminalApp(window).play(game)
+        self.assertEqual(game.time_elapsed, 0)
