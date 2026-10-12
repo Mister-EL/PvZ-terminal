@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "challenge-11-minefield",
+  "name": "Минное поле",
+  "kind": "challenge",
+  "chapter": "Испытания точности",
+  "order": 26,
+  "seed": 2426,
+  "sun": 200,
+  "allowed_plants": [
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 200
+  },
+  "description": "В колоде только картофельные мины. Восемь целей нужно встретить заранее подготовленными ловушками.",
+  "objective": "Уничтожить восемь одиночных бронированных целей за 200 солнца.",
+  "waves": [
+    {
+      "duration": 110,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 80,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 100,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 35,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 60,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
