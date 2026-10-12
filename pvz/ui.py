@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import curses
+import time
 import unicodedata
 
 from .constants import GRID_HEIGHT, GRID_WIDTH, PLANT_DESCRIPTIONS, PLANT_NAMES
@@ -110,3 +111,138 @@ def draw_game(window, game, final=False):
     screen.put(22, 2, "WASD/стрелки: клетка  1–9: выбор  Пробел: посадить  R: выкопать")
     screen.put(23, 2, "P: пауза  ?: справка  Q: меню")
     window.refresh()
+
+
+DIFFICULTY_NAMES = {"easy": "Лёгкая", "normal": "Обычная", "hard": "Сложная"}
+
+
+class TerminalApp:
+    def __init__(self, window, *, tick_seconds=.2, seed=None, difficulty="normal"):
+        self.window = window
+        self.screen = Screen(window)
+        self.tick_seconds, self.seed, self.difficulty = tick_seconds, seed, difficulty
+        window.keypad(True)
+        window.timeout(100)
+        try:
+            curses.curs_set(0)
+        except curses.error:
+            pass
+
+    def choose(self, title, choices, descriptions=None):
+        if not choices:
+            self.message("Пока пусто", ["В этом разделе нет сценариев."])
+            return None
+        selected = 0
+        while True:
+            if not self.screen.playable:
+                self.screen.resize_notice()
+            else:
+                rows, cols = self.screen.size
+                self.window.erase()
+                self.screen.put(1, 4, "PVZ / TERMINAL", curses.A_BOLD)
+                self.screen.put(3, 4, title, curses.A_BOLD)
+                page_size = max(1, rows - 12)
+                start = (selected // page_size) * page_size
+                for i in range(start, min(len(choices), start + page_size)):
+                    focused = i == selected
+                    self.screen.put(5 + i - start, 4, ("> " if focused else "  ") + choices[i], curses.A_REVERSE if focused else 0)
+                if descriptions:
+                    self.screen.put(rows - 5, 4, descriptions[selected])
+                self.screen.put(rows - 3, 4, f"{selected+1}/{len(choices)}   Стрелки/W/S: выбрать   Enter: открыть   Q/Esc: назад")
+                self.window.refresh()
+            key = self.window.getch()
+            if key in (ord("q"), ord("Q"), 27):
+                return None
+            if not self.screen.playable:
+                continue
+            if key in (curses.KEY_UP, ord("w"), ord("W"), ord("k")):
+                selected = (selected - 1) % len(choices)
+            elif key in (curses.KEY_DOWN, ord("s"), ord("S"), ord("j")):
+                selected = (selected + 1) % len(choices)
+            elif key == curses.KEY_NPAGE:
+                selected = min(len(choices) - 1, selected + page_size)
+            elif key == curses.KEY_PPAGE:
+                selected = max(0, selected - page_size)
+            elif key in (10, 13, curses.KEY_ENTER, ord(" ")):
+                return selected
+
+    def message(self, title, lines):
+        while True:
+            self.window.erase()
+            self.screen.put(1, 3, title, curses.A_BOLD)
+            for y, line in enumerate(lines, 3):
+                self.screen.put(y, 3, line)
+            self.screen.put(self.screen.size[0] - 2, 3, "Enter: продолжить   Q/Esc: назад")
+            self.window.refresh()
+            key = self.window.getch()
+            if key in (10, 13, curses.KEY_ENTER, ord(" ")):
+                return True
+            if key in (27, ord("q"), ord("Q")):
+                return False
+
+    def catalogue(self, kind):
+        from .content import list_scenarios
+        scenarios = list_scenarios(kind)
+        labels = [f"{i+1:02}  {s.name}  /  {len(s.waves)} волн" for i, s in enumerate(scenarios)]
+        selected = self.choose("Кампания" if kind == "campaign" else "Испытания", labels, [s.description for s in scenarios])
+        if selected is not None:
+            scenario = scenarios[selected]
+            if self.message(scenario.name, [scenario.description, "", scenario.objective, "", f"Начальное солнце: {scenario.sun}", f"Врагов: {scenario.zombie_count}   Волны: {len(scenario.waves)}", "", "Первые враги придут после подготовки. Начните с защиты рядов."]):
+                self.session(scenario)
+
+    def run(self):
+        while True:
+            choice = self.choose("Защитите пять рядов до последнего зомби.", ["Кампания", "Испытания", "Выживание", "Сложность: " + DIFFICULTY_NAMES[self.difficulty], "Управление и растения", "Выход"])
+            if choice is None or choice == 5:
+                return
+            if choice in (0, 1):
+                self.catalogue("campaign" if choice == 0 else "challenge")
+            elif choice == 2:
+                self.session()
+            elif choice == 3:
+                index = self.choose("Сложность", list(DIFFICULTY_NAMES.values()), ["Меньше здоровья, урона и скорости врагов.", "Исходные значения: тактика и экономика.", "Больше здоровья, урона и скорости врагов."])
+                if index is not None:
+                    self.difficulty = tuple(DIFFICULTY_NAMES)[index]
+            elif choice == 4:
+                self.help()
+
+    def help(self):
+        self.message("Управление", ["WASD или стрелки — выбрать клетку. 1–9 — выбрать растение.", "Пробел — посадить. R — выкопать без возврата солнца.", "P — пауза. ? — эта справка, время в ней остановлено.", "Q — вернуться в меню. Enter в меню — выбрать.", "", "P горох, S подсолнух, W орех, C зубастик, I лёд, X вишня,", "D двойной горох, M мина, F двойной подсолнух.", "", "z обычный, Z конус, B ведро, r бегун, H щитоносец.", "* слева — газонокосилка: одна последняя защита на ряд.", "hp под клеткой — здоровье растения или ближайшего врага.", "", "Защищайте все ряды. Подсолнухи приносят доход каждые4с.", "Мине нужно12с подготовки. Вишня взрывает область3×3.", "Щит блокирует лёд, но не контактные взрывы."])
+
+    def session(self, scenario=None):
+        from .game import Game
+        while True:
+            game = Game(self.tick_seconds, self.seed, scenario=scenario, difficulty=self.difficulty)
+            self.play(game)
+            if game.game_over_reason == "Выход":
+                return
+            result = "Победа!" if game.victory else "Оборона прорвана"
+            choice = self.choose(f"{result}   Счёт {game.score}   Время {game.time_elapsed:.1f}с", ["Повторить", "Вернуться в меню"], [f"Уничтожено{game.zombies_killed}, посажено{game.plants_placed}, потеряно{game.plants_lost}", f"Потрачено косилок: {game.lawnmowers_used}"])
+            if choice != 0:
+                return
+
+    def play(self, game):
+        previous = time.monotonic()
+        accumulator = 0.0
+        while not game.game_over:
+            now = time.monotonic()
+            delta, previous = min(now - previous, .5), now
+            playable = self.screen.playable
+            if playable and not game.paused:
+                accumulator += delta
+                while accumulator >= game.tick_seconds and not game.game_over:
+                    game.step()
+                    accumulator -= game.tick_seconds
+            else:
+                accumulator = 0.0
+            draw_game(self.window, game)
+            key = self.window.getch()
+            if key in (ord("q"), ord("Q"), 27):
+                game.handle_keypress(ord("q"))
+            elif key in (ord("?"), ord("h"), ord("H")):
+                self.help()
+                previous, accumulator = time.monotonic(), 0.0
+            elif playable:
+                direction = {curses.KEY_UP: "w", curses.KEY_DOWN: "s", curses.KEY_LEFT: "a", curses.KEY_RIGHT: "d"}
+                game.handle_keypress(ord(direction[key]) if key in direction else key)
+        draw_game(self.window, game, final=True)
