@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "challenge-43-double-rent",
+  "name": "Двойная аренда",
+  "kind": "challenge",
+  "chapter": "Испытания ограничений",
+  "order": 58,
+  "seed": 2458,
+  "sun": 175,
+  "allowed_plants": [
+    "DOUBLE_SUNFLOWER",
+    "POTATO_MINE",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 2,
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Подсолнух занимает половину доступной грядки. Для атаки остаётся единственное место.",
+  "objective": "Чередовать группу и фланг в одном атакующем слоте.",
+  "waves": [
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 50,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 80,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 80,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 80,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 70,
+          "row": 0,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
