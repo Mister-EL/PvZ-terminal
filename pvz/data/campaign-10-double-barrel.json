@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "id": "campaign-10-double-barrel",
+  "name": "Двойной ствол",
+  "kind": "campaign",
+  "chapter": "4. Железный квартал",
+  "order": 10,
+  "seed": 2410,
+  "sun": 400,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "SNOW_PEA",
+    "REPEATER"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "В центре идут щиты, на соседних рядах — конусы. Двойная очередь помогает продавить броню.",
+  "objective": "Выстроить огневые пары против смешанной брони.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 35,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 45,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 32,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 44,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 23,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 38,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 50,
+          "row": 4,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
