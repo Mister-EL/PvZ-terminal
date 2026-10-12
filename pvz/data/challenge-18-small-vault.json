@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "challenge-18-small-vault",
+  "name": "Малое хранилище",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 33,
+  "seed": 2433,
+  "sun": 75,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 75,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Запас вмещает лишь 75 солнца. Обычный горохострел недоступен даже после долгого ожидания.",
+  "objective": "Содержать минную оборону из маленьких поступлений.",
+  "waves": [
+    {
+      "duration": 110,
+      "spawns": [
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 115,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 62,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 84,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 104,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-18-small-vault",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 15,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 30,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 45,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 60,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 110,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 125,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 140,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 170,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 195,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 2
+    }
+  ]
+}
