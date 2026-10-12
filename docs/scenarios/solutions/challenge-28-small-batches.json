@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-28-small-batches",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 8.0,
+      "plant": "SUNFLOWER",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "time": 12.0,
+      "plant": "SUNFLOWER",
+      "row": 4,
+      "col": 0
+    },
+    {
+      "time": 16.0,
+      "plant": "SUNFLOWER",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "time": 20.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 24.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "time": 32.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "time": 36.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 2
+    },
+    {
+      "time": 40.0,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 54.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 56.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 65.1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 68.0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 78.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 80.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "time": 84.0,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 102.0,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 3
+    },
+    {
+      "time": 135.0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 3
+    }
+  ]
+}

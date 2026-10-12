@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "challenge-28-small-batches",
+  "name": "Малые партии",
+  "kind": "challenge",
+  "chapter": "Испытания экономики",
+  "order": 43,
+  "seed": 2443,
+  "sun": 150,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "POTATO_MINE",
+    "CHERRY_BOMB",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 250,
+    "plant_cost_multiplier": 1.5,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Стоимость повышена в полтора раза, а запас ограничен 250. Дорогой обстрел не входит в колоду.",
+  "objective": "Разворачивать недорогие линии и локальное уничтожение брони.",
+  "waves": [
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 48,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 68,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 14,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 62,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 95,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 32,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 54,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 76,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
