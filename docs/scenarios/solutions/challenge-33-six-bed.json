@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-33-six-bed",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 1,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 2,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 3,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 20,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 80,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 155,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "id": "challenge-33-six-bed",
+  "name": "Грядка на шесть",
+  "kind": "challenge",
+  "chapter": "Испытания ограничений",
+  "order": 48,
+  "seed": 2448,
+  "sun": 550,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 6,
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Один подсолнух должен оплатить оборону пяти рядов. Шестое место нельзя навсегда занять лишней экономикой.",
+  "objective": "Оставить место для центральной вишни при ограниченной грядке.",
+  "waves": [
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 35,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 35,
+          "row": 4,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 45,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 45,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 25,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 25,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 30,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 50,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 50,
+          "row": 3,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
