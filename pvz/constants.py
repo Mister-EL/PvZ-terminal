@@ -6,6 +6,7 @@ from .types import PlantType, ZombieType
 
 GRID_WIDTH = 9
 GRID_HEIGHT = 5
+SIMULATION_STEP = 0.05
 
 PROJECTILE_SPEED_CELLS_PER_SECOND = 5.0
 # Compatibility for external code that imported the old constant.
