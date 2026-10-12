@@ -224,3 +224,30 @@ class AchievementTests(TempProgressTestCase):
         with self.assertRaises(ProgressError):
             store.save()
         self.assertEqual(self.path.read_bytes(), raw)
+
+class CorruptShapeTests(TempProgressTestCase):
+    def test_malformed_nested_json_never_crashes_or_overwrites(self):
+        cases = [
+            {'version': 1, 'results': {}, 'achievements': [{'id': 'first-victory'}]},
+            {'version': 1, 'results': {'test': {'normal': []}}, 'achievements': []},
+            {'version': True, 'results': {}, 'achievements': []},
+            {'version': 1, 'results': [], 'achievements': []},
+        ]
+        for data in cases:
+            with self.subTest(data=data):
+                raw = json.dumps(data).encode()
+                self.path.write_bytes(raw)
+                store = ProgressStore(self.path).load()
+                self.assertIsNotNone(store.load_error)
+                with self.assertRaises(ProgressError):
+                    store.save()
+                self.assertEqual(self.path.read_bytes(), raw)
+
+    def test_duplicate_json_keys_are_rejected(self):
+        raw = b'{"version":9,"version":1,"results":{},"achievements":[]}'
+        self.path.write_bytes(raw)
+        store = ProgressStore(self.path).load()
+        self.assertIsNotNone(store.load_error)
+        with self.assertRaises(ProgressError):
+            store.save()
+        self.assertEqual(self.path.read_bytes(), raw)

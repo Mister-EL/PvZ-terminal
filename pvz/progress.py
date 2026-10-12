@@ -36,6 +36,15 @@ class ProgressError(ValueError):
     """Progress is invalid or saving would replace an unverified file."""
 
 
+def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ProgressError('Duplicate JSON field')
+        result[key] = value
+    return result
+
+
 def _empty_progress() -> dict[str, Any]:
     return {'version': SCHEMA_VERSION, 'results': {}, 'achievements': []}
 
@@ -100,7 +109,7 @@ def _validate_progress(data: Any) -> None:
     achievements = data['achievements']
     if not isinstance(achievements, list) or len(achievements) > 64:
         raise ProgressError('Invalid achievement list')
-    if any(item not in ACHIEVEMENTS for item in achievements) or len(set(achievements)) != len(achievements):
+    if any(not isinstance(item, str) or item not in ACHIEVEMENTS for item in achievements) or len(set(achievements)) != len(achievements):
         raise ProgressError('Invalid achievement identifiers')
 
 
@@ -155,7 +164,7 @@ class ProgressStore:
             raw = self._read_bytes()
             if raw is not None:
                 self._fingerprint = self._fingerprint_bytes(raw)
-                data = json.loads(raw)
+                data = json.loads(raw, object_pairs_hook=_unique_object)
                 _validate_progress(data)
                 self.data = data
         except (OSError, UnicodeError, ValueError, RecursionError) as error:
@@ -176,7 +185,7 @@ class ProgressStore:
         return bool(result and result['wins'] > 0)
 
     def unlocked_campaign(self, scenarios: Iterable[Any], difficulty: str = "normal") -> tuple[str, ...]:
-        if difficulty not in DIFFICULTY_IDS:
+        if not isinstance(difficulty, str) or difficulty not in DIFFICULTY_IDS:
             raise ProgressError('Invalid campaign difficulty')
         ids = [scenario if isinstance(scenario, str) else scenario.id for scenario in scenarios]
         if any(not _valid_id(item) for item in ids) or len(set(ids)) != len(ids):
@@ -206,7 +215,7 @@ class ProgressStore:
                       lawnmowers_used: int = 0, sun_generated: int = 0) -> tuple[str, ...]:
         if not self._writable:
             raise ProgressError('Original progress was not verified; recording is disabled')
-        if not _valid_id(scenario_id) or difficulty not in DIFFICULTY_IDS:
+        if not _valid_id(scenario_id) or not isinstance(difficulty, str) or difficulty not in DIFFICULTY_IDS:
             raise ProgressError('Invalid scenario or difficulty')
         if type(victory) is not bool or not _counter(score) or not _duration(duration):
             raise ProgressError('Invalid match result')
