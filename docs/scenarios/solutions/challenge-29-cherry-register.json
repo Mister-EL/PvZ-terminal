@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-29-cherry-register",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "SUNFLOWER",
+      "row": 2,
+      "col": 0
+    },
+    {
+      "time": 20.0,
+      "plant": "CHERRY_BOMB",
+      "row": 1,
+      "col": 7
+    },
+    {
+      "time": 68.0,
+      "plant": "CHERRY_BOMB",
+      "row": 3,
+      "col": 7
+    },
+    {
+      "time": 128.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 188.0,
+      "plant": "CHERRY_BOMB",
+      "row": 1,
+      "col": 7
+    }
+  ]
+}
