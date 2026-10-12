@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "challenge-26-pin-to-wall",
+  "name": "Прижать к стене",
+  "kind": "challenge",
+  "chapter": "Испытания радиуса",
+  "order": 41,
+  "seed": 2441,
+  "sun": 150,
+  "allowed_plants": [
+    "WALL_NUT",
+    "CHERRY_BOMB",
+    "DOUBLE_SUNFLOWER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "В одном ряду цели появляются с интервалом и растягиваются. Орех собирает их для общего взрыва.",
+  "objective": "Сгруппировать врагов перед бомбардировкой.",
+  "waves": [
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 27,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 34,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 12,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 19,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 26,
+          "row": 1,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 95,
+      "spawns": [
+        {
+          "time": 12,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 19,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 26,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}

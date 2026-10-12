@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-26-pin-to-wall",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 20.0,
+      "plant": "CHERRY_BOMB",
+      "row": 1,
+      "col": 7
+    },
+    {
+      "time": 45.0,
+      "plant": "CHERRY_BOMB",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 97.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 7
+    },
+    {
+      "time": 122.0,
+      "plant": "CHERRY_BOMB",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 187.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 7
+    },
+    {
+      "time": 212.0,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 4
+    }
+  ]
+}
