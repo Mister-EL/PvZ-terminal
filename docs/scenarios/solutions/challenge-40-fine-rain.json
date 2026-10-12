@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-40-fine-rain",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 8,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 16,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 24,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 32,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 88,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 96,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 104,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 2
+    }
+  ]
+}

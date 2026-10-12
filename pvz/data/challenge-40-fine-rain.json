@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "challenge-40-fine-rain",
+  "name": "Мелкий дождь",
+  "kind": "challenge",
+  "chapter": "Испытания ритма",
+  "order": 55,
+  "seed": 2455,
+  "sun": 100,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "sky_sun_interval": 2,
+    "sun_cap": 100,
+    "max_plants": 8
+  },
+  "description": "Солнце приходит быстро, но запас вмещает лишь 100. Нужны регулярные небольшие покупки.",
+  "objective": "Тратить маленькие поступления до заполнения хранилища.",
+  "waves": [
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 25,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 55,
+          "row": 2,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 65,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 75,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 36,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 50,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 64,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}
