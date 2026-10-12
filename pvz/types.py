@@ -12,6 +12,7 @@ class PlantType(Enum):
     SNOW_PEA = "I"
     CHERRY_BOMB = "X"
     REPEATER = "D"
+    POTATO_MINE = "M"
 
 
 class ZombieType(Enum):
