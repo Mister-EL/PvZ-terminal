@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-36-closed-rear",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 0,
+      "plant": "WALL_NUT",
+      "row": 2,
+      "col": 6
+    },
+    {
+      "time": 2,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 3
+    },
+    {
+      "time": 4,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 3
+    },
+    {
+      "time": 24,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "time": 48,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 3
+    }
+  ]
+}

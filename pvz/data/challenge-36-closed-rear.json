@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "id": "challenge-36-closed-rear",
+  "name": "Закрытый тыл",
+  "kind": "challenge",
+  "chapter": "Испытания рельефа",
+  "order": 51,
+  "seed": 2451,
+  "sun": 650,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "REPEATER",
+    "SNOW_PEA",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "blocked_cells": [
+      {
+        "row": 0,
+        "col": 0
+      },
+      {
+        "row": 0,
+        "col": 1
+      },
+      {
+        "row": 0,
+        "col": 2
+      },
+      {
+        "row": 1,
+        "col": 0
+      },
+      {
+        "row": 1,
+        "col": 1
+      },
+      {
+        "row": 1,
+        "col": 2
+      },
+      {
+        "row": 2,
+        "col": 0
+      },
+      {
+        "row": 2,
+        "col": 1
+      },
+      {
+        "row": 2,
+        "col": 2
+      },
+      {
+        "row": 3,
+        "col": 0
+      },
+      {
+        "row": 3,
+        "col": 1
+      },
+      {
+        "row": 3,
+        "col": 2
+      },
+      {
+        "row": 4,
+        "col": 0
+      },
+      {
+        "row": 4,
+        "col": 1
+      },
+      {
+        "row": 4,
+        "col": 2
+      }
+    ],
+    "preplanted": [
+      {
+        "row": 2,
+        "col": 3,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Первые три колонки недоступны. Стрелять придётся с короткой дистанции.",
+  "objective": "Поддержать переднюю очередь барьерами и замедлением.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 58,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 3,
+          "zombie": "CONE"
+        },
+        {
+          "time": 48,
+          "row": 2,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 48,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 68,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
