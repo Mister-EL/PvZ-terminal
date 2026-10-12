@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "id": "challenge-31-five-seats",
+  "name": "Пять мест",
+  "kind": "challenge",
+  "chapter": "Испытания ограничений",
+  "order": 46,
+  "seed": 2446,
+  "sun": 600,
+  "allowed_plants": [
+    "DOUBLE_SUNFLOWER",
+    "REPEATER",
+    "POTATO_MINE",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 5,
+    "passive_sun": false,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "plant": "DOUBLE_SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Два двойных подсолнуха уже занимают часть грядки. На постоянную оборону всех рядов места нет.",
+  "objective": "Совмещать две батареи с временными центральными взрывами.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 15,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 15,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 15,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 15,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 40,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
