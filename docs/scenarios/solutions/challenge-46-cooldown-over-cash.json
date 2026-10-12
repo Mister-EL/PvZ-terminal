@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-46-cooldown-over-cash",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 15,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 30,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "time": 45,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 70,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 85,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 100,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "time": 115,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 170,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 185,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 200,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "time": 215,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    }
+  ]
+}

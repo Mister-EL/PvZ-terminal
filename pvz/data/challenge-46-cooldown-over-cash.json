@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "id": "challenge-46-cooldown-over-cash",
+  "name": "Перезарядка важнее солнца",
+  "kind": "challenge",
+  "chapter": "Испытания ритма",
+  "order": 61,
+  "seed": 2461,
+  "sun": 50,
+  "allowed_plants": [
+    "POTATO_MINE",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 4,
+    "sky_sun_interval": 1,
+    "sun_cap": 50
+  },
+  "description": "Солнце приходит каждую секунду, но в запасе только 50. Деньги есть почти всегда, а мина готова раз в 15 секунд.",
+  "objective": "Подготовить четыре минных ряда, соблюдая общий темп посадки.",
+  "waves": [
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 50,
+          "row": 0,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 50,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 50,
+          "row": 3,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 50,
+          "row": 4,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 100,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
