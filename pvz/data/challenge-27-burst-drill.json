@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "id": "challenge-27-burst-drill",
+  "name": "Очередь по бегунам",
+  "kind": "challenge",
+  "chapter": "Испытания огня",
+  "order": 42,
+  "seed": 2442,
+  "sun": 1000,
+  "allowed_plants": [
+    "REPEATER"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 1000
+  },
+  "description": "На всё поле выделен бюджет пяти двойных стрелков. Плотные быстрые группы проверяют темп стрельбы.",
+  "objective": "Развернуть пять батарей до одновременного натиска.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 12,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 12,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 12,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 12,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 12,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 14,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 14,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 14,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 14,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 14,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 16,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 16,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 16,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 16,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 16,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}

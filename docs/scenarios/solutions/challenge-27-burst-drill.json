@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-27-burst-drill",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0.0,
+      "plant": "REPEATER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 2.0,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 4.0,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 6.0,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 8.0,
+      "plant": "REPEATER",
+      "row": 4,
+      "col": 1
+    }
+  ]
+}
