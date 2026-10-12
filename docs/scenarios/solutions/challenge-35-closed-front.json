@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-35-closed-front",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 1,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 2,
+      "plant": "PEASHOOTER",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 3,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 4,
+      "plant": "PEASHOOTER",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 35,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 93,
+      "plant": "CHERRY_BOMB",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 110,
+      "plant": "REPEATER",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "time": 112,
+      "plant": "REPEATER",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "time": 114,
+      "plant": "REPEATER",
+      "row": 2,
+      "col": 2
+    }
+  ]
+}
