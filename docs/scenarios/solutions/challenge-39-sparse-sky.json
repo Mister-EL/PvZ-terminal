@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-39-sparse-sky",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "PEASHOOTER",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "time": 1,
+      "plant": "PEASHOOTER",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "time": 30,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 60,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 90,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 150,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 180,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    }
+  ]
+}
