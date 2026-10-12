@@ -155,6 +155,18 @@ class ProgressStore:
                 break
         return tuple(unlocked)
 
+    def lifetime_stats(self) -> dict[str, int | float]:
+        statistics: dict[str, int | float] = {name: 0 for name in (*STAT_NAMES, 'duration', 'attempts', 'wins', 'completed_scenarios')}
+        for scenario_id, difficulties in self.data['results'].items():
+            if scenario_id != 'survival' and any(result['wins'] for result in difficulties.values()):
+                statistics['completed_scenarios'] += 1
+            for result in difficulties.values():
+                statistics['attempts'] += result['attempts']
+                statistics['wins'] += result['wins']
+                for name in (*STAT_NAMES, 'duration'):
+                    statistics[name] += result['totals'][name]
+        return statistics
+
     def record_result(self, scenario_id: str, difficulty: str, *, victory: bool,
                       score: int, duration: float, kills: int = 0,
                       plants_placed: int = 0, plants_lost: int = 0,

@@ -156,3 +156,22 @@ class CampaignUnlockTests(TempProgressTestCase):
         self.assertEqual(store.unlocked_campaign([]), ())
         with self.assertRaises(ProgressError):
             store.unlocked_campaign(['campaign-01', 'campaign-01'])
+
+
+class LifetimeStatisticsTests(TempProgressTestCase):
+    def test_statistics_aggregate_matches_without_counting_one_stage_twice(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('campaign-01', 'normal', victory=True, score=1, duration=20,
+                            kills=4, plants_placed=3, sun_generated=100)
+        store.record_result('campaign-01', 'hard', victory=True, score=2, duration=30,
+                            kills=6, plants_placed=4, plants_lost=1, sun_generated=150)
+        store.record_result('survival', 'normal', victory=False, score=3, duration=50,
+                            kills=10, lawnmowers_used=2, sun_generated=200)
+        stats = store.lifetime_stats()
+        self.assertEqual(stats, dict(kills=20, plants_placed=7, plants_lost=1,
+            lawnmowers_used=2, sun_generated=450, duration=100.0, attempts=3, wins=2, completed_scenarios=1))
+        stats['kills'] = 10000
+        self.assertEqual(store.lifetime_stats()['kills'], 20)
+        store.save()
+        restored = ProgressStore(self.path).load()
+        self.assertEqual(restored.lifetime_stats()['wins'], 2)
