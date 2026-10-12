@@ -39,7 +39,7 @@ class PersistenceTests(TempProgressTestCase):
         store = ProgressStore(self.path).load()
         store.save()
         previous = self.path.read_bytes()
-        store.data['achievements'].append('test')
+        store.data['achievements'].append('first-victory')
         with patch('pvz.progress.os.replace', side_effect=OSError('disk failure')):
             with self.assertRaises(OSError):
                 store.save()
@@ -175,3 +175,52 @@ class LifetimeStatisticsTests(TempProgressTestCase):
         store.save()
         restored = ProgressStore(self.path).load()
         self.assertEqual(restored.lifetime_stats()['wins'], 2)
+
+
+class AchievementTests(TempProgressTestCase):
+    def test_achievements_follow_actual_match_stats_and_are_awarded_once(self):
+        store = ProgressStore(self.path).load()
+        defeat = store.record_result('campaign-01', 'normal', victory=False, score=1, duration=90,
+            kills=8, plants_placed=5, sun_generated=999)
+        self.assertEqual(defeat, ())
+        earned = store.record_result('campaign-01', 'normal', victory=True, score=8, duration=90,
+            kills=8, plants_placed=5, sun_generated=1000)
+        self.assertEqual(earned, ('first-victory', 'untouched-lawn', 'careful-gardener', 'sun-farmer'))
+        repeated = store.record_result('campaign-01', 'normal', victory=True, score=8, duration=90,
+            kills=8, plants_placed=5, sun_generated=1000)
+        self.assertEqual(repeated, ())
+        store.save()
+        self.assertEqual(ProgressStore(self.path).load().achievements, earned)
+
+    def test_mower_and_plant_losses_prevent_clean_defense_achievements(self):
+        store = ProgressStore(self.path).load()
+        earned = store.record_result('challenge-test', 'normal', victory=True, score=8, duration=90,
+            kills=8, plants_placed=5, plants_lost=1, lawnmowers_used=1)
+        self.assertEqual(earned, ('first-victory',))
+
+    def test_hunter_and_survival_thresholds(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('survival', 'normal', victory=False, score=99, duration=299, kills=99)
+        self.assertNotIn('zombie-hunter', store.achievements)
+        self.assertNotIn('survivor', store.achievements)
+        earned = store.record_result('survival', 'normal', victory=False, score=1, duration=300, kills=1)
+        self.assertEqual(earned, ('zombie-hunter', 'survivor'))
+
+    def test_campaign_completion_counts_distinct_stages(self):
+        store = ProgressStore(self.path).load()
+        for number in range(1, 15):
+            for difficulty in ('normal', 'hard'):
+                store.record_result(f'campaign-{number:02}', difficulty, victory=True, score=1, duration=20, kills=1)
+        self.assertNotIn('campaign-veteran', store.achievements)
+        self.assertIn('hard-winner', store.achievements)
+        earned = store.record_result('campaign-15', 'normal', victory=True, score=1, duration=20, kills=1)
+        self.assertEqual(earned, ('campaign-veteran',))
+
+    def test_unknown_achievement_in_file_is_preserved_as_invalid(self):
+        raw = json.dumps({'version': 1, 'results': {}, 'achievements': ['made-up']}).encode()
+        self.path.write_bytes(raw)
+        store = ProgressStore(self.path).load()
+        self.assertIsNotNone(store.load_error)
+        with self.assertRaises(ProgressError):
+            store.save()
+        self.assertEqual(self.path.read_bytes(), raw)
