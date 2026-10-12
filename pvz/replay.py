@@ -7,16 +7,20 @@ Determinism requires the same game version and scenario data.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 import json
 import math
 import os
 from pathlib import Path
 import re
 import tempfile
-from typing import Any
+from typing import Any, Callable, TYPE_CHECKING
 
 from .constants import DIFFICULTIES, SIMULATION_STEP
 from .types import PlantType
+
+if TYPE_CHECKING:
+    from .game import Game
 
 SCHEMA_VERSION = 1
 MAX_DURATION = 7200.0
@@ -227,3 +231,110 @@ def save_replay(replay: Replay, path: str | Path) -> None:
     finally:
         if temporary is not None:
             os.unlink(temporary)
+
+
+@dataclass(frozen=True)
+class ReplayResult:
+    game: Game
+    stats: dict[str, object]
+
+
+def game_stats(game: Game) -> dict[str, object]:
+    """Summarize an outcome and fingerprint its observable simulation state."""
+    if game.victory:
+        outcome = "victory"
+    elif game.game_over:
+        outcome = "quit" if game.game_over_reason == "Выход" else "defeat"
+    else:
+        outcome = "paused" if game.paused else "in_progress"
+    stats: dict[str, object] = {
+        "outcome": outcome, "elapsed": game.time_elapsed, "score": game.score,
+        "sun": game.sun, "wave": game.wave_number, "waves": game.wave_total,
+        "zombies_killed": game.zombies_killed, "plants_placed": game.plants_placed,
+        "plants_lost": game.plants_lost, "lawnmowers_used": game.lawnmowers_used,
+        "sun_generated": game.sun_generated,
+    }
+    state = {
+        "stats": stats, "seed": game.seed, "difficulty": game.difficulty,
+        "scenario": game.scenario.id if game.scenario else None,
+        "cursor": [game.cursor_row, game.cursor_col], "selected": game.selected.name,
+        "lawnmowers": game.lawnmowers,
+        "cooldowns": {plant.name: game.cooldown_remaining(plant) for plant in PlantType},
+        "plants": [[p.plant_type.name, p.row, p.col, p.hp, p.last_action_time, p.chewing_until]
+                   for p in game.grid.iter_plants()],
+        "zombies": [[z.zombie_type.name, z.row, z.col, z.hp, z.move_progress, z.shield_hp, z.slowed_until]
+                    for z in game.zombies],
+        "projectiles": [[p.row, p.col, p.slows] for p in game.projectiles],
+    }
+    canonical = json.dumps(state, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    stats["state_sha256"] = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return stats
+
+
+def _resolve_scenario(identifier: str, loader: Callable[[str], Any] | None) -> Any:
+    if loader is None:
+        try:
+            from .content import load_scenario
+        except ImportError as exc:
+            raise ReplayError("scenario catalogue is unavailable") from exc
+        loader = load_scenario
+    try:
+        scenario = loader(identifier)
+    except (ValueError, OSError) as exc:
+        raise ReplayError(f"cannot load scenario: {identifier}") from exc
+    if getattr(scenario, "id", None) != identifier:
+        raise ReplayError("scenario loader returned a different identifier")
+    return scenario
+
+
+def play_replay(replay: Replay, *, scenario_loader: Callable[[str], Any] | None = None,
+                on_step: Callable[[Game], None] | None = None) -> ReplayResult:
+    """Run legal inputs headlessly with fixed simulation slices.
+
+    Inputs sharing a timestamp retain their file order. The optional callback
+    observes the initial game and every simulated step; it must not mutate it.
+    Natural victory or defeat ends playback early. Inputs after that end are
+    rejected instead of being silently discarded.
+    """
+    from .game import Game
+
+    checked = parse_replay(replay.to_dict())
+    scenario = _resolve_scenario(checked.scenario, scenario_loader) if checked.scenario else None
+    try:
+        game = Game(SIMULATION_STEP, seed=checked.seed,
+                    difficulty=checked.difficulty, scenario=scenario)
+    except (ValueError, KeyError, AttributeError, TypeError) as exc:
+        raise ReplayError("scenario cannot be initialized by the current game") from exc
+    if on_step:
+        on_step(game)
+    current_step = 0
+
+    def advance(target: int) -> None:
+        nonlocal current_step
+        while current_step < target and not game.game_over:
+            if game.paused:
+                raise ReplayError("simulation cannot advance while paused")
+            game.step()
+            current_step = round(game.time_elapsed / SIMULATION_STEP)
+            if on_step:
+                on_step(game)
+
+    for action in checked.actions:
+        advance(round(action.time / SIMULATION_STEP))
+        if game.game_over:
+            raise ReplayError("recorded input follows the end of the game")
+        if action.kind == "select":
+            slot = list(PlantType).index(PlantType[action.plant]) + 1
+            game.select_plant_type(slot)
+        elif action.kind == "move":
+            game.handle_keypress(ord(DIRECTIONS[action.direction]))
+        elif action.kind == "plant":
+            game.place_selected()
+        elif action.kind == "dig":
+            game.dig_up()
+        elif action.kind in ("pause", "resume"):
+            game.handle_keypress(ord("p"))
+        else:
+            game.handle_keypress(ord("q"))
+    advance(round(checked.duration / SIMULATION_STEP))
+    return ReplayResult(game, game_stats(game))
