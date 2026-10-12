@@ -71,7 +71,7 @@ class Game:
         self.plants_lost = 0
         self.lawnmowers = [True] * GRID_HEIGHT
         self.lawnmowers_used = 0
-        self.selected: PlantType = PlantType.PEASHOOTER
+        self.selected: PlantType = (PlantType.PEASHOOTER if PlantType.PEASHOOTER in self.allowed_plants else (self.allowed_plants[0] if self.allowed_plants else PlantType.PEASHOOTER))
         self.cursor_row = 2
         self.cursor_col = 1
         self.time_elapsed = 0.0
@@ -185,22 +185,45 @@ class Game:
             self.cursor_col = max(0, self.cursor_col - 1)
         elif key in (ord("d"), ord("D")):
             self.cursor_col = min(GRID_WIDTH - 1, self.cursor_col + 1)
-        elif key in (ord("1"), ord("2"), ord("3"), ord("4")):
+        elif ord("1") <= key <= ord("9"):
             self.select_plant_type(int(chr(key)))
         elif key == ord(" "):
             self.place_selected()
         elif key in (ord("r"), ord("R")):
             self.dig_up()
 
-    def select_plant_type(self, slot: int) -> None:
-        mapping = {
-            1: PlantType.PEASHOOTER,
-            2: PlantType.SUNFLOWER,
-            3: PlantType.WALL_NUT,
-            4: PlantType.CHOMPER,
-        }
-        if slot in mapping:
-            self.selected = mapping[slot]
+    def select_plant_type(self, slot: int) -> bool:
+        roster = tuple(PlantType)
+        if 1 <= slot <= len(roster):
+            plant_type = roster[slot - 1]
+            if plant_type in self.allowed_plants:
+                self.selected = plant_type
+                return True
+            self.show_message("растение недоступно в этом испытании")
+        return False
+
+    def plant_status(self, plant: Plant) -> str:
+        if plant.is_chewing(self.time_elapsed):
+            return f"жуёт ещё {plant.chewing_until - self.time_elapsed:.1f} с"
+        if plant.plant_type == PlantType.POTATO_MINE:
+            remaining = max(0.0, MINE_ARM_TIME - (self.time_elapsed - plant.last_action_time))
+            return f"подготовка: {remaining:.1f} с" if remaining else "мина готова"
+        if plant.plant_type == PlantType.CHERRY_BOMB:
+            remaining = max(0.0, BOMB_FUSE - (self.time_elapsed - plant.last_action_time))
+            return f"взрыв через {remaining:.1f} с"
+        return f"здоровье: {max(0, round(plant.hp))}/{PLANT_HEALTH[plant.plant_type]}"
+
+    def next_spawn_in(self) -> Optional[float]:
+        if not self.scenario:
+            return max(0.0, self._next_spawn_time - self.time_elapsed)
+        if self._scenario_complete:
+            return None
+        wave = self.scenario.waves[self._wave_index]
+        if self._wave_spawn_index < len(wave.spawns):
+            return max(0.0, self._wave_start + wave.spawns[self._wave_spawn_index].time - self.time_elapsed)
+        if self._wave_index + 1 < len(self.scenario.waves):
+            return max(0.0, self._wave_start + wave.duration - self.time_elapsed)
+        return None
 
     def cooldown_remaining(self, plant_type: PlantType) -> float:
         return max(0.0, round(self._plant_ready_at[plant_type] - self.time_elapsed, 10))
