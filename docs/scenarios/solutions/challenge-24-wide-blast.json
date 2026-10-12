@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-24-wide-blast",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 15,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 30,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 62,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 77,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 92,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 107,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 122,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "time": 152,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 167,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 182,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 197,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 212,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    }
+  ]
+}

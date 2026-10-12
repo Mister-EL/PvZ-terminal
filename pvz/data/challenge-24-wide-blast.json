@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "challenge-24-wide-blast",
+  "name": "Широкий фронт",
+  "kind": "challenge",
+  "chapter": "Испытания радиуса",
+  "order": 39,
+  "seed": 2439,
+  "sun": 650,
+  "allowed_plants": [
+    "CHERRY_BOMB",
+    "POTATO_MINE",
+    "WALL_NUT"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 650,
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 2,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 4,
+        "col": 5,
+        "plant": "WALL_NUT"
+      }
+    ]
+  },
+  "description": "Группы идут по разнесённым рядам. Одна вишня не накрывает всё поле.",
+  "objective": "Разделить широкую атаку между бомбами и минами.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 24,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 24,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 24,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 36,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 36,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 95,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 34,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 54,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 74,
+          "row": 3,
+          "zombie": "BUCKET"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
