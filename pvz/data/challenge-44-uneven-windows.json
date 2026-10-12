@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "id": "challenge-44-uneven-windows",
+  "name": "Неравные окна",
+  "kind": "challenge",
+  "chapter": "Испытания рельефа",
+  "order": 59,
+  "seed": 2459,
+  "sun": 900,
+  "allowed_plants": [
+    "REPEATER",
+    "CHOMPER",
+    "SNOW_PEA"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 5,
+    "passive_sun": false,
+    "sun_cap": 900,
+    "blocked_cells": [
+      {
+        "row": 0,
+        "col": 0
+      },
+      {
+        "row": 0,
+        "col": 2
+      },
+      {
+        "row": 0,
+        "col": 3
+      },
+      {
+        "row": 0,
+        "col": 4
+      },
+      {
+        "row": 0,
+        "col": 5
+      },
+      {
+        "row": 0,
+        "col": 6
+      },
+      {
+        "row": 0,
+        "col": 7
+      },
+      {
+        "row": 0,
+        "col": 8
+      },
+      {
+        "row": 1,
+        "col": 0
+      },
+      {
+        "row": 1,
+        "col": 1
+      },
+      {
+        "row": 1,
+        "col": 3
+      },
+      {
+        "row": 1,
+        "col": 4
+      },
+      {
+        "row": 1,
+        "col": 5
+      },
+      {
+        "row": 1,
+        "col": 6
+      },
+      {
+        "row": 1,
+        "col": 7
+      },
+      {
+        "row": 1,
+        "col": 8
+      },
+      {
+        "row": 2,
+        "col": 0
+      },
+      {
+        "row": 2,
+        "col": 1
+      },
+      {
+        "row": 2,
+        "col": 2
+      },
+      {
+        "row": 2,
+        "col": 4
+      },
+      {
+        "row": 2,
+        "col": 5
+      },
+      {
+        "row": 2,
+        "col": 6
+      },
+      {
+        "row": 2,
+        "col": 7
+      },
+      {
+        "row": 2,
+        "col": 8
+      },
+      {
+        "row": 3,
+        "col": 0
+      },
+      {
+        "row": 3,
+        "col": 1
+      },
+      {
+        "row": 3,
+        "col": 2
+      },
+      {
+        "row": 3,
+        "col": 3
+      },
+      {
+        "row": 3,
+        "col": 5
+      },
+      {
+        "row": 3,
+        "col": 6
+      },
+      {
+        "row": 3,
+        "col": 7
+      },
+      {
+        "row": 3,
+        "col": 8
+      },
+      {
+        "row": 4,
+        "col": 0
+      },
+      {
+        "row": 4,
+        "col": 1
+      },
+      {
+        "row": 4,
+        "col": 2
+      },
+      {
+        "row": 4,
+        "col": 3
+      },
+      {
+        "row": 4,
+        "col": 4
+      },
+      {
+        "row": 4,
+        "col": 6
+      },
+      {
+        "row": 4,
+        "col": 7
+      },
+      {
+        "row": 4,
+        "col": 8
+      }
+    ]
+  },
+  "description": "Единственная площадка каждого следующего ряда расположена ближе к врагу. Дистанции по рядам различаются.",
+  "objective": "Выбрать очередь для быстрого тыла и контактную защиту ближе к входу.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 20,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 21,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 22,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 23,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 24,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 30,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 31,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 32,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 33,
+          "row": 1,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 35,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 35,
+          "row": 1,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 3,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 10,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 32,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 34,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 40,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 42,
+          "row": 1,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
