@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "id": "challenge-03-glass-cannon",
+  "name": "Стеклянная батарея",
+  "kind": "challenge",
+  "chapter": "Испытания огня",
+  "order": 18,
+  "seed": 2418,
+  "sun": 400,
+  "allowed_plants": [
+    "PEASHOOTER",
+    "SUNFLOWER",
+    "SNOW_PEA",
+    "REPEATER",
+    "CHERRY_BOMB"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 1,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Доступны только доход, стрелки и бомба. Бегуны проверяют скорость развёртывания.",
+  "objective": "Удержать поле без барьеров и ближнего боя.",
+  "waves": [
+    {
+      "duration": 60,
+      "spawns": [
+        {
+          "time": 18,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 28,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 38,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 5,
+          "row": 3,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 22,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 5,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 20,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 40,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 55,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
