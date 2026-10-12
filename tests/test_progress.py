@@ -128,3 +128,31 @@ class ResultTests(TempProgressTestCase):
         store.record_result('preplanted-test', 'normal', victory=False, score=0, duration=20,
                             plants_placed=0, plants_lost=5)
         self.assertEqual(store.best_result('preplanted-test')['totals']['plants_lost'], 5)
+
+
+class CampaignUnlockTests(TempProgressTestCase):
+    def test_first_level_available_and_victory_opens_next(self):
+        store = ProgressStore(self.path).load()
+        sequence = ['campaign-01', 'campaign-02', 'campaign-03']
+        self.assertEqual(store.unlocked_campaign(sequence), ('campaign-01',))
+        store.record_result('campaign-01', 'normal', victory=True, score=1, duration=20)
+        store.save()
+        restored = ProgressStore(self.path).load()
+        self.assertTrue(restored.is_completed('campaign-01'))
+        self.assertEqual(restored.unlocked_campaign(sequence), ('campaign-01', 'campaign-02'))
+
+    def test_defeat_and_other_difficulty_do_not_unlock_levels(self):
+        store = ProgressStore(self.path).load()
+        sequence = [SimpleNamespace(id='campaign-01'), SimpleNamespace(id='campaign-02')]
+        store.record_result('campaign-01', 'normal', victory=False, score=1, duration=20)
+        store.record_result('campaign-01', 'hard', victory=True, score=1, duration=20)
+        self.assertEqual(store.unlocked_campaign(sequence), ('campaign-01',))
+        self.assertEqual(store.unlocked_campaign(sequence, 'hard'), ('campaign-01', 'campaign-02'))
+
+    def test_completed_later_stage_cannot_skip_an_unfinished_stage(self):
+        store = ProgressStore(self.path).load()
+        store.record_result('campaign-03', 'normal', victory=True, score=1, duration=20)
+        self.assertEqual(store.unlocked_campaign(['campaign-01', 'campaign-02', 'campaign-03', 'campaign-04']), ('campaign-01',))
+        self.assertEqual(store.unlocked_campaign([]), ())
+        with self.assertRaises(ProgressError):
+            store.unlocked_campaign(['campaign-01', 'campaign-01'])
