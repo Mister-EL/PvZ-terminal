@@ -264,7 +264,7 @@ class Game:
             end_col = projectile.col + PROJECTILE_SPEED_CELLS_PER_SECOND * self._dt
             # Include the initial cell: a pea created next to a zombie must hit it.
             targets = [z for z in self.zombies if z.row == projectile.row
-                       and projectile.col <= z.col <= end_col and z.hp > 0]
+                       and math.floor(projectile.col) <= z.col <= end_col and z.hp > 0]
             target = min(targets, key=lambda z: z.col, default=None)
             if target:
                 if projectile.slows and target.shield_hp <= 0:
