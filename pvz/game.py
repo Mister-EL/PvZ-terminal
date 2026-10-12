@@ -69,7 +69,7 @@ class Game:
         self.zombies_killed = 0
         self.plants_placed = 0
         self.plants_lost = 0
-        self.lawnmowers = [True] * GRID_HEIGHT
+        self.lawnmowers = [not self.modifiers.get("no_mowers", False)] * GRID_HEIGHT
         self.lawnmowers_used = 0
         self.selected: PlantType = (PlantType.PEASHOOTER if PlantType.PEASHOOTER in self.allowed_plants else (self.allowed_plants[0] if self.allowed_plants else PlantType.PEASHOOTER))
         self.cursor_row = 2

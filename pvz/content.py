@@ -109,13 +109,17 @@ def _key(value: Any, where: str, keys: frozenset[str]) -> str:
 
 def _modifiers(value: Any, allowed: tuple[str, ...], sun: int) -> Mapping[str, object]:
     where = "modifiers"
-    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants"}
+    fields = {"passive_sun", "sun_cap", "time_limit", "preplanted", "bonus_sun_per_wave", "plant_cost_multiplier", "max_plants", "no_mowers"}
     data = _object(value, where, fields, set())
     result: dict[str, object] = {}
     if "passive_sun" in data:
         if type(data["passive_sun"]) is not bool:
             _fail(where, "passive_sun must be boolean")
         result["passive_sun"] = data["passive_sun"]
+    if "no_mowers" in data:
+        if type(data["no_mowers"]) is not bool:
+            _fail(where, "no_mowers must be boolean")
+        result["no_mowers"] = data["no_mowers"]
     if "sun_cap" in data:
         cap = data["sun_cap"]
         if cap is not None:
