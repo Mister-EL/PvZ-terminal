@@ -1,9 +1,12 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pvz.content import list_scenarios
 from pvz.game import Game
 from pvz.recording import MatchRecording
-from pvz.replay import game_stats, play_replay
+from pvz.replay import game_stats, load_replay, play_replay
+from pvz.ui import TerminalApp
 
 
 class LiveRecordingTests(unittest.TestCase):
@@ -42,3 +45,41 @@ class LiveRecordingTests(unittest.TestCase):
         recording.handle_keypress(ord("q"))
         recording.handle_keypress(ord("w"))
         self.assertEqual(len(recording.finish().actions), 1)
+
+    def app_for_directory(self, directory):
+        app = object.__new__(TerminalApp)
+        app.seed, app.tick_seconds, app.difficulty = 11, .2, 'normal'
+        app.record_dir, app.progress = directory, None
+        games, alerts = [], []
+        def play(game, recording):
+            games.append(game)
+            for key in '2 w1 ':
+                app.apply_input(game, ord(key), recording)
+                game.step()
+            app.apply_input(game, ord('q'), recording)
+        app.play = play
+        app.message = lambda title, lines: alerts.append(title)
+        return app, games, alerts
+
+    def test_session_quit_saves_exact_playback_without_overwriting_other_matches(self):
+        with TemporaryDirectory() as temporary:
+            directory = Path(temporary) / 'records'
+            app, games, alerts = self.app_for_directory(directory)
+            app.session()
+            first, = directory.glob('*.json')
+            original = first.read_bytes()
+            self.assertEqual(play_replay(load_replay(first)).stats, game_stats(games[0]))
+            app.session()
+            self.assertEqual(len(list(directory.glob('*.json'))), 2)
+            self.assertEqual(first.read_bytes(), original)
+            self.assertFalse(alerts)
+
+    def test_unavailable_record_directory_preserves_existing_file_and_match(self):
+        with TemporaryDirectory() as temporary:
+            target = Path(temporary) / 'protected-file'
+            target.write_text('existing contents', encoding='utf-8')
+            app, games, alerts = self.app_for_directory(target)
+            app.session()
+            self.assertEqual(target.read_text(encoding='utf-8'), 'existing contents')
+            self.assertEqual(games[0].game_over_reason, 'Выход')
+            self.assertEqual(alerts, ['Повтор не записан'])
