@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "challenge-25-frost-reserve",
+  "name": "Ледяной резерв",
+  "kind": "challenge",
+  "chapter": "Испытания резерва",
+  "order": 40,
+  "seed": 2440,
+  "sun": 600,
+  "allowed_plants": [
+    "SNOW_PEA",
+    "WALL_NUT",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "passive_sun": false,
+    "sun_cap": 600
+  },
+  "description": "Три ряда атакуют постоянно, а солнце больше не прибавляется. Каждая ледяная линия стоит большую долю бюджета.",
+  "objective": "Построить три замедляющие линии и сохранить резерв ловушки.",
+  "waves": [
+    {
+      "duration": 75,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 38,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 54,
+          "row": 4,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 46,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 90,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 28,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 48,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 68,
+          "row": 2,
+          "zombie": "RUNNER"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}

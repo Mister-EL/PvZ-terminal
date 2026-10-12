@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-25-frost-reserve",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "SNOW_PEA",
+      "row": 0,
+      "col": 1
+    },
+    {
+      "time": 2,
+      "plant": "SNOW_PEA",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "time": 4,
+      "plant": "SNOW_PEA",
+      "row": 4,
+      "col": 1
+    },
+    {
+      "time": 100,
+      "plant": "WALL_NUT",
+      "row": 2,
+      "col": 5
+    },
+    {
+      "time": 150,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    }
+  ]
+}
