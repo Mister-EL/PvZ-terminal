@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-20-nut-position",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "WALL_NUT",
+      "row": 2,
+      "col": 3
+    }
+  ]
+}
