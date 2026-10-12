@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "id": "challenge-04-wall-garden",
+  "name": "Ореховый лабиринт",
+  "kind": "challenge",
+  "chapter": "Испытания ближнего боя",
+  "order": 19,
+  "seed": 2419,
+  "sun": 350,
+  "allowed_plants": [
+    "SUNFLOWER",
+    "WALL_NUT",
+    "CHOMPER",
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "preplanted": [
+      {
+        "row": 0,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 1,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 2,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 3,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 4,
+        "col": 5,
+        "plant": "WALL_NUT"
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "plant": "SUNFLOWER"
+      }
+    ]
+  },
+  "description": "Передняя стена уже стоит, но за ней нет стрелков. Победу обеспечат хищники и мины.",
+  "objective": "Уничтожить врагов колодой без снарядов.",
+  "waves": [
+    {
+      "duration": 65,
+      "spawns": [
+        {
+          "time": 22,
+          "row": 1,
+          "zombie": "NORMAL"
+        },
+        {
+          "time": 38,
+          "row": 3,
+          "zombie": "NORMAL"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 70,
+      "spawns": [
+        {
+          "time": 8,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 22,
+          "row": 4,
+          "zombie": "CONE"
+        },
+        {
+          "time": 38,
+          "row": 2,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    },
+    {
+      "duration": 85,
+      "spawns": [
+        {
+          "time": 5,
+          "row": 1,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 20,
+          "row": 3,
+          "zombie": "SHIELD"
+        },
+        {
+          "time": 36,
+          "row": 0,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 52,
+          "row": 4,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 68,
+          "row": 2,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 3
+    }
+  ]
+}
