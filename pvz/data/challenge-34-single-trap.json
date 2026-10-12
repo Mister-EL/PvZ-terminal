@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "id": "challenge-34-single-trap",
+  "name": "Одна ловушка",
+  "kind": "challenge",
+  "chapter": "Испытания ограничений",
+  "order": 49,
+  "seed": 2449,
+  "sun": 200,
+  "allowed_plants": [
+    "POTATO_MINE"
+  ],
+  "modifiers": {
+    "no_mowers": true,
+    "max_plants": 1,
+    "passive_sun": false,
+    "sun_cap": 200
+  },
+  "description": "Новая мина допустима только после взрыва старой. Враги переключаются между рядами.",
+  "objective": "Соблюсти последовательность восьми ловушек.",
+  "waves": [
+    {
+      "duration": 105,
+      "spawns": [
+        {
+          "time": 20,
+          "row": 2,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 35,
+          "row": 0,
+          "zombie": "CONE"
+        },
+        {
+          "time": 50,
+          "row": 4,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 70,
+          "row": 1,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 90,
+          "row": 3,
+          "zombie": "SHIELD"
+        }
+      ],
+      "number": 1
+    },
+    {
+      "duration": 80,
+      "spawns": [
+        {
+          "time": 10,
+          "row": 2,
+          "zombie": "BUCKET"
+        },
+        {
+          "time": 30,
+          "row": 0,
+          "zombie": "RUNNER"
+        },
+        {
+          "time": 55,
+          "row": 4,
+          "zombie": "CONE"
+        }
+      ],
+      "number": 2
+    }
+  ]
+}

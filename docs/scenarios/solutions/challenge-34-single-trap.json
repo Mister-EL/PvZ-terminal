@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "scenario": "challenge-34-single-trap",
+  "difficulty": "normal",
+  "actions": [
+    {
+      "time": 0,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 27.5,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 49.5,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    },
+    {
+      "time": 64.5,
+      "plant": "POTATO_MINE",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "time": 84.5,
+      "plant": "POTATO_MINE",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "time": 104.5,
+      "plant": "POTATO_MINE",
+      "row": 2,
+      "col": 4
+    },
+    {
+      "time": 129.5,
+      "plant": "POTATO_MINE",
+      "row": 0,
+      "col": 4
+    },
+    {
+      "time": 144.5,
+      "plant": "POTATO_MINE",
+      "row": 4,
+      "col": 4
+    }
+  ]
+}
