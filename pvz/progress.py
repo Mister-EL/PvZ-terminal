@@ -20,6 +20,17 @@ DIFFICULTY_IDS = frozenset(('easy', 'normal', 'hard'))
 STAT_NAMES = ('kills', 'plants_placed', 'plants_lost', 'lawnmowers_used', 'sun_generated')
 _ID_PATTERN = re.compile(r'[a-z0-9][a-z0-9-]{0,79}\Z')
 
+ACHIEVEMENTS = {
+    'first-victory': ('Первый росток', 'Победить в кампании или испытании.'),
+    'untouched-lawn': ('Газон под защитой', 'Победить, уничтожив зомби и не использовав газонокосилки.'),
+    'careful-gardener': ('Бережный садовник', 'Победить с пятью посадками и пятью уничтоженными зомби, не потеряв растения.'),
+    'sun-farmer': ('Солнечный запас', 'Получить 1000 солнца за одну игру.'),
+    'zombie-hunter': ('Охотник', 'Уничтожить 100 зомби за все игры.'),
+    'survivor': ('Долгая ночь', 'Продержаться пять минут в режиме выживания.'),
+    'campaign-veteran': ('Последний звонок', 'Пройти 15 разных уровней кампании.'),
+    'hard-winner': ('Трудный урожай', 'Победить на высокой сложности и уничтожить хотя бы одного зомби.'),
+}
+
 
 class ProgressError(ValueError):
     """Progress is invalid or saving would replace an unverified file."""
@@ -89,8 +100,26 @@ def _validate_progress(data: Any) -> None:
     achievements = data['achievements']
     if not isinstance(achievements, list) or len(achievements) > 64:
         raise ProgressError('Invalid achievement list')
-    if any(not _valid_id(item) for item in achievements) or len(set(achievements)) != len(achievements):
+    if any(item not in ACHIEVEMENTS for item in achievements) or len(set(achievements)) != len(achievements):
         raise ProgressError('Invalid achievement identifiers')
+
+
+def _earned_achievements(data: dict[str, Any], scenario_id: str, difficulty: str,
+                         run: dict[str, Any]) -> tuple[str, ...]:
+    matches = [result for difficulties in data['results'].values() for result in difficulties.values()]
+    campaign_completed = sum(scenario.startswith('campaign-') and any(result['wins'] for result in difficulties.values())
+                             for scenario, difficulties in data['results'].items())
+    conditions = {
+        'first-victory': run['victory'],
+        'untouched-lawn': run['victory'] and run['kills'] > 0 and run['lawnmowers_used'] == 0,
+        'careful-gardener': run['victory'] and run['kills'] >= 5 and run['plants_placed'] >= 5 and run['plants_lost'] == 0,
+        'sun-farmer': run['sun_generated'] >= 1000,
+        'zombie-hunter': sum(result['totals']['kills'] for result in matches) >= 100,
+        'survivor': scenario_id == 'survival' and run['duration'] >= 300,
+        'campaign-veteran': campaign_completed >= 15,
+        'hard-winner': run['victory'] and difficulty == 'hard' and run['kills'] > 0,
+    }
+    return tuple(achievement for achievement in ACHIEVEMENTS if conditions[achievement] and achievement not in data['achievements'])
 
 
 class ProgressStore:
@@ -133,6 +162,10 @@ class ProgressStore:
             self.load_error = str(error)
             self._writable = False
         return self
+
+    @property
+    def achievements(self) -> tuple[str, ...]:
+        return tuple(self.data['achievements'])
 
     def best_result(self, scenario_id: str, difficulty: str = "normal") -> dict[str, Any] | None:
         result = self.data['results'].get(scenario_id, {}).get(difficulty)
@@ -200,9 +233,11 @@ class ProgressStore:
             result['best_duration'] = float(duration)
         for name in (*STAT_NAMES, 'duration'):
             result['totals'][name] += stats[name]
+        earned = _earned_achievements(staged, scenario_id, difficulty, run)
+        staged['achievements'].extend(earned)
         _validate_progress(staged)
         self.data = staged
-        return ()
+        return earned
 
     def record_game(self, game) -> tuple[str, ...]:
         if not game.game_over:
