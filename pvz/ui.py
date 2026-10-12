@@ -118,11 +118,12 @@ DIFFICULTY_NAMES = {"easy": "Лёгкая", "normal": "Обычная", "hard": 
 
 
 class TerminalApp:
-    def __init__(self, window, *, tick_seconds=.2, seed=None, difficulty="normal", progress=None):
+    def __init__(self, window, *, tick_seconds=.2, seed=None, difficulty="normal", progress=None, record_dir=None):
         self.window = window
         self.screen = Screen(window)
         self.tick_seconds, self.seed, self.difficulty = tick_seconds, seed, difficulty
         self.progress = progress
+        self.record_dir = record_dir
         window.keypad(True)
         window.timeout(100)
         try:
@@ -265,8 +266,27 @@ class TerminalApp:
     def session(self, scenario=None):
         from .game import Game
         while True:
-            game = Game(self.tick_seconds, self.seed, scenario=scenario, difficulty=self.difficulty)
-            self.play(game)
+            seed = self.seed
+            if seed is None and self.record_dir:
+                from secrets import randbelow
+                seed = scenario.seed if scenario else randbelow(2147483648)
+            game = Game(self.tick_seconds, seed, scenario=scenario, difficulty=self.difficulty)
+            recording = None
+            if self.record_dir:
+                from .recording import MatchRecording
+                recording = MatchRecording(game)
+            self.play(game, recording)
+            if recording and not getattr(recording, 'failed', False):
+                from pathlib import Path
+                from uuid import uuid4
+                from .replay import ReplayError, save_replay
+                try:
+                    directory = Path(self.record_dir)
+                    directory.mkdir(mode=0o700, parents=True, exist_ok=True)
+                    target = directory / f"{scenario.id if scenario else 'survival'}-{uuid4().hex}.json"
+                    save_replay(recording.finish(), target)
+                except (ReplayError, OSError):
+                    self.message("Повтор не записан", ["Каталог недоступен или превышен предел записи.", "Партия завершена, существующие повторы сохранены."])
             if game.game_over_reason == "Выход":
                 return
             earned = ()
@@ -285,7 +305,7 @@ class TerminalApp:
             if choice != 0:
                 return
 
-    def play(self, game):
+    def play(self, game, recording=None):
         previous = time.monotonic()
         accumulator = 0.0
         was_playable = self.screen.playable
@@ -306,11 +326,22 @@ class TerminalApp:
             draw_game(self.window, game)
             key = self.window.getch()
             if key in (ord("q"), ord("Q"), 27):
-                game.handle_keypress(ord("q"))
+                self.apply_input(game, ord("q"), recording)
             elif key in (ord("?"), ord("h"), ord("H")):
                 self.help()
                 previous, accumulator = time.monotonic(), 0.0
             elif playable:
                 direction = {curses.KEY_UP: "w", curses.KEY_DOWN: "s", curses.KEY_LEFT: "a", curses.KEY_RIGHT: "d"}
-                game.handle_keypress(ord(direction[key]) if key in direction else key)
+                self.apply_input(game, ord(direction[key]) if key in direction else key, recording)
         draw_game(self.window, game, final=True)
+
+    def apply_input(self, game, key, recording):
+        if recording and not getattr(recording, 'failed', False):
+            from .replay import ReplayError
+            try:
+                recording.handle_keypress(key)
+                return
+            except ReplayError:
+                recording.failed = True
+                game.show_message("Предел записи повтора достигнут")
+        game.handle_keypress(key)

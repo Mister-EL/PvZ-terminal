@@ -27,6 +27,7 @@ def build_parser() -> argparse.ArgumentParser:
     modes.add_argument("--list-scenarios", action="store_true", help="Список сценариев без запуска терминального интерфейса")
     parser.add_argument("--no-save", action="store_true", help="Играть без записи прогресса")
     parser.add_argument("--progress-file", type=Path, help="Путь к файлу прогресса")
+    parser.add_argument("--record-dir", type=Path, help="Записывать повторы партий в этот каталог")
     parser.add_argument(
         "--tick-ms",
         type=int,
@@ -42,6 +43,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if not 10 <= args.tick_ms <= 1000:
         parser.error("--tick-ms: допустимо10..1000мс")
+    if args.record_dir and args.seed is not None and not 0 <= args.seed <= 2147483647:
+        parser.error("--record-dir требует --seed в пределах0..2147483647")
     try:
         if args.list_scenarios:
             for scenario in list_scenarios():
@@ -58,7 +61,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         if not state_home.is_absolute():
             state_home = Path.home() / ".local" / "state"
         progress = None if args.no_save else ProgressStore(args.progress_file or state_home / "pvz-terminal" / "progress.json").load()
-        app = TerminalApp(window, tick_seconds=args.tick_ms / 1000, seed=args.seed, difficulty=args.difficulty, progress=progress)
+        app = TerminalApp(window, tick_seconds=args.tick_ms / 1000, seed=args.seed, difficulty=args.difficulty, progress=progress, record_dir=args.record_dir)
         if progress and progress.load_error:
             app.message("Файл прогресса не прочитан", ["Повреждённый файл останется без изменений.", "Играйте с --no-save или укажите другой --progress-file."])
         if args.scenario or args.survival:
